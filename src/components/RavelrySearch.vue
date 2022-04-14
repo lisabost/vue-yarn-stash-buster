@@ -11,6 +11,7 @@
 
 <script>
 import axios from 'axios';
+
 export default {
   name: "RavelrySearch",
   props: {},
@@ -53,7 +54,8 @@ export default {
             })
             .finally(() => {
               this.$emit('search-finished', this.searchResults)
-              console.log('Search Results: ' + this.searchResults);
+              //console.log('Search Results: ' + this.searchResults);
+              //console.log('first search result: ' + this.searchResults[0].name);
             })
       }
     }

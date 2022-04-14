@@ -2,7 +2,8 @@
   <div id="app">
     <navigation-header></navigation-header>
     <b-container>
-      <ravelry-search></ravelry-search>
+      <ravelry-search @search-finished="displaySearchResults"></ravelry-search>
+      <search-results-display :searchResults="displayResults"></search-results-display>
     </b-container>
 
 <!--    <nav>-->
@@ -12,6 +13,29 @@
 <!--    <router-view/>-->
   </div>
 </template>
+
+<script>
+import NavigationHeader from "@/views/NavigationHeader";
+import RavelrySearch from "@/components/RavelrySearch";
+import SearchResultsDisplay from "@/components/SearchResultsDisplay";
+import Pattern from "@/models/Pattern";
+export default {
+  components: {SearchResultsDisplay, RavelrySearch, NavigationHeader},
+  data() {
+    return {
+      displayResults: []
+    }
+  },
+  methods: {
+    displaySearchResults(searchResults) {
+      for (const i in searchResults) {
+        this.displayResults.push(Object.assign(new Pattern, searchResults[i]))
+      }
+      console.log('The first display result is: ' + this.displayResults[0]);
+    }
+  }
+}
+</script>
 
 <style>
 #app {
@@ -34,10 +58,3 @@ nav a.router-link-exact-active {
   color: #42b983;
 }
 </style>
-<script>
-import NavigationHeader from "@/views/NavigationHeader";
-import RavelrySearch from "@/components/RavelrySearch";
-export default {
-  components: {RavelrySearch, NavigationHeader}
-}
-</script>
