@@ -1,6 +1,10 @@
 <template>
   <div id="app">
     <navigation-header></navigation-header>
+    <b-container>
+      <ravelry-search></ravelry-search>
+    </b-container>
+
 <!--    <nav>-->
 <!--      <router-link to="/">Home</router-link> |-->
 <!--      <router-link to="/about">About</router-link>-->
@@ -14,7 +18,6 @@
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
 }
 
@@ -33,7 +36,8 @@ nav a.router-link-exact-active {
 </style>
 <script>
 import NavigationHeader from "@/views/NavigationHeader";
+import RavelrySearch from "@/components/RavelrySearch";
 export default {
-  components: {NavigationHeader}
+  components: {RavelrySearch, NavigationHeader}
 }
 </script>
