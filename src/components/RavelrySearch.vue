@@ -18,12 +18,25 @@ export default {
   data() {
     return {
       searchTerm: '',
-      searchResults: []
+      searchResults: [],
+      lastSearchTerm: ''
     }
   },
   methods: {
+    checkForNewSearchTerm() {
+      if(this.searchTerm !== this.lastSearchTerm) {
+        this.lastSearchTerm = this.searchTerm;
+        return true;
+      }
+    },
     search() {
       if(this.searchTerm) {
+        let isNewSearch = this.checkForNewSearchTerm();
+        if (isNewSearch) {
+          while (this.searchResults.length > 0){
+            this.searchResults.pop();
+          }
+        }
         this.$emit('searching');
         // build request arguments
         let url = 'https://api.ravelry.com/patterns/search.json';
@@ -54,8 +67,6 @@ export default {
             })
             .finally(() => {
               this.$emit('search-finished', this.searchResults)
-              //console.log('Search Results: ' + this.searchResults);
-              //console.log('first search result: ' + this.searchResults[0].name);
             })
       }
     }

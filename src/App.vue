@@ -2,38 +2,39 @@
   <div id="app">
     <navigation-header></navigation-header>
     <b-container>
-      <ravelry-search @search-finished="displaySearchResults"></ravelry-search>
-      <search-results-display :searchResults="displayResults"></search-results-display>
+      <router-view/>
     </b-container>
-
-<!--    <nav>-->
-<!--      <router-link to="/">Home</router-link> |-->
-<!--      <router-link to="/about">About</router-link>-->
-<!--    </nav>-->
-<!--    <router-view/>-->
   </div>
 </template>
 
 <script>
 import NavigationHeader from "@/views/NavigationHeader";
-import RavelrySearch from "@/components/RavelrySearch";
-import SearchResultsDisplay from "@/components/SearchResultsDisplay";
-import Pattern from "@/models/Pattern";
+// import Pattern from "@/models/Pattern";
+import router from "@/router/router";
 export default {
-  components: {SearchResultsDisplay, RavelrySearch, NavigationHeader},
-  data() {
-    return {
-      displayResults: []
-    }
-  },
-  methods: {
-    displaySearchResults(searchResults) {
-      for (const i in searchResults) {
-        this.displayResults.push(Object.assign(new Pattern, searchResults[i]))
-      }
-      console.log('The first display result is: ' + this.displayResults[0]);
-    }
-  }
+  name: 'App',
+  router,
+  components: {NavigationHeader},
+  // data() {
+  //   return {
+  //     displayResults: []
+  //   }
+  // },
+  // methods: {
+  //   displaySearchResults(searchResults) {
+  //     if(this.displayResults.length > 0){
+  //       this.clearResults();
+  //     }
+  //     for (const i in searchResults) {
+  //       this.displayResults.push(Object.assign(new Pattern, searchResults[i]))
+  //     }
+  //   },
+  //   clearResults() {
+  //     while(this.displayResults.length > 0) {
+  //       this.displayResults.pop();
+  //     }
+  //   }
+  // }
 }
 </script>
 

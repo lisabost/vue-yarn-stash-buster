@@ -1,15 +1,15 @@
 <template>
   <div class="search-results-display">
-    <h2 class="content-heading">Search Results</h2>
-    <pattern-card :patterns="searchResults"></pattern-card>
+    <h2 class="content-heading mt-3">Search Results</h2>
+    <pattern-list :patterns="searchResults"></pattern-list>
   </div>
 </template>
 
 <script>
-import PatternCard from "@/components/PatternCard";
+import PatternList from "@/components/PatternList";
 export default {
   name: "SearchResultsDisplay",
-  components: {PatternCard},
+  components: {PatternList},
   props: {
     searchResults: {type: Array}
   }
