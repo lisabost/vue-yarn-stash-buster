@@ -43,6 +43,7 @@ export default {
         let config = {
           params: {
             query: this.searchTerm,
+            page_size: 20
           },
           auth: {
             username: 'd94df3344302c08b7079c71041d90bbb',

@@ -1,6 +1,7 @@
 <template>
-  <b-card class="my-2">
+  <b-card class="my-2 card">
     <slot></slot>
+    <footer class="sticky-footer text-center"><slot name="footer"></slot></footer>
   </b-card>
 </template>
 
@@ -11,5 +12,13 @@ export default {
 </script>
 
 <style scoped>
-
+.sticky-footer {
+  position: absolute;
+  bottom: 0;
+  width: 80%;
+  justify-content: center;
+}
+.card {
+  height: 400px;
+}
 </style>

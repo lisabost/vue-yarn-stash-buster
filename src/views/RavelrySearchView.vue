@@ -12,7 +12,7 @@ import Pattern from "@/models/Pattern";
 
 export default {
   name: "RavelrySearchView",
-  components: {SearchResultsDisplay, RavelrySearch,},
+  components: { SearchResultsDisplay, RavelrySearch,},
   data() {
     return {
       displayResults: []
