@@ -8,7 +8,7 @@
           <b-card-sub-title>Designer: {{pattern.designer.name}}</b-card-sub-title>
         </template>
         <template v-slot:footer>
-          <popup-modal :item="pattern">More Details</popup-modal>
+          <more-details-modal :item="pattern">More Details</more-details-modal>
         </template>
       </card-body>
     </b-card-group>
@@ -17,10 +17,10 @@
 
 <script>
 import CardBody from "@/components/CardBody";
-import PopupModal from "@/components/PopupModal";
+import MoreDetailsModal from "@/components/MoreDetailsModal";
 export default {
   name: "PatternList",
-  components: {PopupModal, CardBody},
+  components: {MoreDetailsModal, CardBody},
   props: {
     patterns: {type: Array}
   }

@@ -1,19 +1,22 @@
 <template>
   <div>
     <b-button v-b-modal="modalId" @click="moreDetails"><slot></slot></b-button>
-
-    <b-modal :id="modalId" centered title="Scrollable Content">
-      <p class="my-4" v-html="pattern.notes_html"></p>
-    </b-modal>
+    <basic-modal :title="pattern.name" :id="modalId">
+      <template>
+        <p class="my-4" v-html="pattern.notes_html"></p>
+      </template>
+    </basic-modal>
   </div>
 </template>
 
 <script>
 import axios from "axios";
 import Pattern from "@/models/Pattern";
+import BasicModal from "@/components/BasicModal";
 
 export default {
-  name: "PopupModal",
+  name: "MoreDetailsModal",
+  components: {BasicModal},
   props: {item: {type: Object}},
   data() {
     return {
