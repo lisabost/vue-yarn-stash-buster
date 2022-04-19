@@ -3,9 +3,7 @@
     <b-button v-b-modal="modalId" @click="moreDetails"><slot></slot></b-button>
 
     <b-modal :id="modalId" centered title="Scrollable Content">
-      <p class="my-4">
-        {{pattern.notes_html}}
-      </p>
+      <p class="my-4" v-html="pattern.notes_html"></p>
     </b-modal>
   </div>
 </template>
