@@ -3,6 +3,10 @@
     <b-button v-b-modal="modalId" @click="moreDetails"><slot></slot></b-button>
     <basic-modal :title="pattern.name" :id="modalId">
       <template>
+        <p v-if="pattern.price > 0">Price: {{pattern.price}} {{pattern.currency}}</p>
+        <p>Get the Pattern:
+          <a :href="`https://ravelry.com/patterns/library/${item.permalink}`">{{pattern.name}}</a>
+        </p>
         <p class="my-4" v-html="pattern.notes_html"></p>
       </template>
     </basic-modal>
@@ -57,7 +61,7 @@ export default {
   computed: {
     modalId() {
       return 'modal-' + this.item.id;
-    }
+    },
   }
 }
 </script>
