@@ -1,5 +1,6 @@
 <template>
   <b-card class="my-2 card">
+    <header><slot name="header"></slot></header>
     <slot></slot>
     <footer class="sticky-footer text-center"><slot name="footer"></slot></footer>
   </b-card>

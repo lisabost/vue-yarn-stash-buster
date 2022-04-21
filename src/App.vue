@@ -15,26 +15,6 @@ export default {
   name: 'App',
   router,
   components: {NavigationHeader},
-  // data() {
-  //   return {
-  //     displayResults: []
-  //   }
-  // },
-  // methods: {
-  //   displaySearchResults(searchResults) {
-  //     if(this.displayResults.length > 0){
-  //       this.clearResults();
-  //     }
-  //     for (const i in searchResults) {
-  //       this.displayResults.push(Object.assign(new Pattern, searchResults[i]))
-  //     }
-  //   },
-  //   clearResults() {
-  //     while(this.displayResults.length > 0) {
-  //       this.displayResults.pop();
-  //     }
-  //   }
-  // }
 }
 </script>
 
