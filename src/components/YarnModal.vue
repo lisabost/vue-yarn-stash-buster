@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-button @click="$bvModal.show(modalId)"><slot></slot></b-button>
-    <b-modal @ok.prevent="saveNewYarn" title="Add Yarn to Stash" :id="modalId">
+    <b-modal scrollable centered @ok.prevent="saveNewYarn" title="Add Yarn to Stash" :id="modalId">
       <template>
         <b-form validated>
           <b-form-group label="Yarn Name:" label-for="name">

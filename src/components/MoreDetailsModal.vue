@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-button v-b-modal="modalId" @click="moreDetails"><slot></slot></b-button>
-    <b-modal :title="pattern.name" :id="modalId">
+    <b-modal scrollable centered :title="pattern.name" :id="modalId" class="more-details-modal">
       <template>
         <p v-if="pattern.price > 0">Price: {{pattern.price}} {{pattern.currency}}</p>
         <p>Get the Pattern:
@@ -65,5 +65,7 @@ export default {
 </script>
 
 <style scoped>
-
+.more-details-modal {
+  width: 600px;
+}
 </style>
