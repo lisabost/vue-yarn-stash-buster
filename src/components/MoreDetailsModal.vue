@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-button v-b-modal="modalId" @click="moreDetails"><slot></slot></b-button>
-    <basic-modal :title="pattern.name" :id="modalId">
+    <b-modal :title="pattern.name" :id="modalId">
       <template>
         <p v-if="pattern.price > 0">Price: {{pattern.price}} {{pattern.currency}}</p>
         <p>Get the Pattern:
@@ -9,18 +9,16 @@
         </p>
         <p class="my-4" v-html="pattern.notes_html"></p>
       </template>
-    </basic-modal>
+    </b-modal>
   </div>
 </template>
 
 <script>
 import axios from "axios";
 import Pattern from "@/models/Pattern";
-import BasicModal from "@/components/BasicModal";
 
 export default {
   name: "MoreDetailsModal",
-  components: {BasicModal},
   props: {item: {type: Object}},
   data() {
     return {

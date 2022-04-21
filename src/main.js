@@ -5,9 +5,11 @@ import { BootstrapVue, BootstrapVueIcons } from 'bootstrap-vue'
 
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import {firestorePlugin} from "vuefire";
 
 Vue.use(BootstrapVue)
 Vue.use(BootstrapVueIcons)
+Vue.use(firestorePlugin)
 
 Vue.config.productionTip = false
 

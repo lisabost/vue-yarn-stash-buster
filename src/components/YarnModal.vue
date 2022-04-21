@@ -1,66 +1,77 @@
 <template>
   <div>
-    <b-button v-b-modal="modalId" @submit.prevent="saveNewYarn"><slot></slot></b-button>
-    <basic-modal title="Add Yarn to Stash" :id="modalId">
+    <b-button @click="$bvModal.show(modalId)"><slot></slot></b-button>
+    <b-modal @ok.prevent="saveNewYarn" title="Add Yarn to Stash" :id="modalId">
       <template>
-        <b-form v-model="newYarn">
+        <b-form validated>
           <b-form-group label="Yarn Name:" label-for="name">
-            <b-form-input id="name" v-model="newYarn.name"></b-form-input>
+            <b-form-input id="name" v-model="newYarn.yarn.name" required></b-form-input>
+            <b-form-invalid-feedback>Yarn name is required</b-form-invalid-feedback>
           </b-form-group>
           <b-form-group label="Length in Yards:" label-for="yardage">
-            <b-form-input id="yardage" type="number" v-model="newYarn.length"></b-form-input>
+            <b-form-input id="yardage" type="number" v-model="newYarn.yarn.length" required></b-form-input>
+            <b-form-invalid-feedback>Yarn length must be greater than 0</b-form-invalid-feedback>
           </b-form-group>
           <b-form-group label="Color: " label-for="color">
-            <b-form-input id="color" v-model="newYarn.color"></b-form-input>
+            <b-form-input id="color" v-model="newYarn.yarn.color"></b-form-input>
           </b-form-group>
           <b-form-group label="Yarn Weight:" label-for="weight">
-            <b-form-select id="weight" :options="options" v-model="newYarn.weight"></b-form-select>
+            <b-form-select id="weight" :options="options" v-model="newYarn.yarn.weight" required></b-form-select>
+            <b-form-invalid-feedback>Yarn weight is required.</b-form-invalid-feedback>
           </b-form-group>
           <b-form-group label="Type of Fiber:" label-for="fiber">
-            <b-form-input id="fiber" v-model="newYarn.fiber"></b-form-input>
-          </b-form-group>
-          <b-form-group label="Image" label-for="image">
-            <b-form-file></b-form-file>
+            <b-form-input id="fiber" v-model="newYarn.yarn.fiber"></b-form-input>
           </b-form-group>
         </b-form>
       </template>
-    </basic-modal>
+    </b-modal>
   </div>
 </template>
 
 <script>
-import BasicModal from "@/components/BasicModal";
+import {db} from "@/firebase";
+import Yarn from "@/models/Yarn";
+
 export default {
   name: "YarnModal",
-  components: {BasicModal},
   data() {
     return {
       modalId: 'add-yarn-modal',
       options: [
         {value: null, text: 'Select a yarn weight'},
-        {value: 1, text: 'Lace'},
-        {value: 2, text: 'Fingering/Sock'},
-        {value: 3, text: 'Sport/Baby'},
-        {value: 4, text: 'DK/Light Worsted'},
-        {value: 5, text: 'Worsted/Aran'},
-        {value: 6, text: 'Bulky/Chunky'},
-        {value: 7, text: 'Bulky/Roving'},
-        {value: 8, text: 'Jumbo'},
+        {value: 'lace', text: 'Lace'},
+        {value: 'fingering', text: 'Fingering/Sock'},
+        {value: 'sport', text: 'Sport/Baby'},
+        {value: 'dk', text: 'DK/Light Worsted'},
+        {value: 'worsted', text: 'Worsted/Aran'},
+        {value: 'bulky', text: 'Bulky/Chunky'},
+        {value: 'roving', text: 'Bulky/Roving'},
+        {value: 'jumbo', text: 'Jumbo'},
       ],
       newYarn: {
-        name: '',
-        length: 0,
-        color: '',
-        weight: null,
-        fiber: '',
-        image: ''
+        yarn: new Yarn()
       }
     }
   },
   methods: {
     saveNewYarn() {
-      // TODO: Add yarn to stash
-    }
+      // Add yarn to stash
+      db.collection(Yarn.collectionName)
+        .add(this.newYarn.yarn.toFirestore())
+        .then(docRef => {
+          console.log('Yarn added', docRef)
+
+          // clear the form
+          this.newYarn.yarn = new Yarn();
+          // close modal
+          this.$bvModal.hide(this.modalId);
+        })
+        .catch(error => {
+          console.log('Error adding yarn', error)
+        });
+    },
+  },
+  computed: {
   }
 }
 </script>
