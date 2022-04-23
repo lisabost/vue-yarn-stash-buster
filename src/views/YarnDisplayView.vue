@@ -1,7 +1,7 @@
 <template>
   <div>
-    <yarn-list></yarn-list>
     <yarn-modal :ok-button-text="'Add Yarn'" :modalId="modalId">Add Yarn to Your Stash</yarn-modal>
+    <yarn-list></yarn-list>
   </div>
 </template>
 

@@ -1,6 +1,6 @@
 <template>
-  <b-card class="my-2 card">
-    <header><slot name="header"></slot></header>
+  <b-card class="my-2 reusable-card">
+    <b-card-header class="card-header"><slot name="header"></slot></b-card-header>
     <slot></slot>
     <footer class="sticky-footer text-center"><slot name="footer"></slot></footer>
   </b-card>
@@ -19,7 +19,14 @@ export default {
   width: 80%;
   justify-content: center;
 }
-.card {
+.reusable-card {
   height: 400px;
+  width: 100%;
+}
+.card-header {
+  width: 100%;
+}
+.card-header > div {
+  padding: 0;
 }
 </style>
