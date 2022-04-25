@@ -7,9 +7,9 @@
       <b-card-text class="mt-2">
         <b-row>
           <b-col md="6" class="d-flex flex-column">
-            <b-img :src="yarn.image" :alt="yarn.name"></b-img>
+            <b-img :src="yarn.image" :alt="yarn.name" class="m-3"></b-img>
           </b-col>
-          <b-col md="6" class="d-flex flex-column">
+          <b-col md="6" class="d-flex flex-column mt-3">
             <p v-if="yarn.color">Color: {{yarn.color}}</p>
             <p>Length: {{yarn.length}} yards</p>
             <p>Weight: {{yarn.weight}}</p>
@@ -21,7 +21,7 @@
     <template v-slot:footer>
       <b-row>
         <b-col>
-          <yarn-modal :ok-button-text="'Edit Yarn'" :currently-editing="true" :modalId="getModalId" :yarnId="yarn.id">Edit Yarn</yarn-modal>
+          <yarn-modal :ok-button-text="'Edit Yarn'" :currently-editing="true" :yarn-being-edited="yarn" :modalId="getModalId" :yarnId="yarn.id">Edit Yarn</yarn-modal>
         </b-col>
         <b-col>
           <b-button class="btn-danger delete-button" @click="removeYarn">Delete Yarn</b-button>

@@ -152,14 +152,14 @@ export default {
           .then(docRef => {
             console.log('Yarn updated', docRef)
 
-            // update the image - delete and then add new one
-            storage.child('yarn').child(this.yarnId)
+            //update the image - delete and then add new one
+            storage.child('/yarn').child(this.yarnId)
                 .delete()
                 .catch(error => {
                   console.error('Error deleting yarn', error)
                   this.makeToast('Error deleting yarn', 'Error!', 'danger');
                 });
-            storage.child('yarn').child(this.yarnId)
+            storage.child('/yarn').child(this.yarnId)
               .put(this.newYarn.image)
               .then(snapshot => {
                 console.log('Image updated', snapshot)
@@ -173,7 +173,7 @@ export default {
               .then(url => db.collection('yarn').doc(this.yarnId).update({image: url}))
               .then(docRef => console.log('Yarn Updated', docRef))
               .catch(error => {
-                console.error('Error updating yarn' , error, )
+                console.error('Error updating image' , error)
 
                 // let user know error
                 this.makeToast('Error updating yarn', 'Error', 'danger')

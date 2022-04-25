@@ -26,7 +26,7 @@ export default {
 .card-header {
   width: 100%;
 }
-.card-header > div {
+.reusable-card .card-body {
   padding: 0;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
-  <b-row class="yarn-list-row">
-    <b-col deck v-for="(yarn, i) in yarnCollection" :key="i" class="col-12 col-md-6 yarn-card-col">
+  <b-row>
+    <b-col deck v-for="(yarn, i) in yarnCollection" :key="i" class="col-12 col-md-6 yarn-card-deck">
       <yarn-card class="yarn-card" :yarn="yarn"></yarn-card>
     </b-col>
   </b-row>

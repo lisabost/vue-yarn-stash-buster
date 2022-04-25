@@ -5,8 +5,8 @@ import 'firebase/storage';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyAuqvwKhrs6IgiGGCWuHZovWH-R9GMNTMg",
-    authDomain: "fir-demo-3c08d.firebaseapp.com",
+    apiKey: process.env.VUE_APP_FIREBASE_API_KEY,
+    authDomain: process.env.VUE_APP_FIREBASE_AUTH_DOMAIN,
     projectId: "fir-demo-3c08d",
     storageBucket: "fir-demo-3c08d.appspot.com",
     messagingSenderId: "355307027614",

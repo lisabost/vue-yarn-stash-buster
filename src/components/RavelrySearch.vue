@@ -4,7 +4,8 @@
       <b-form-group id="search-term-input" label="Search Ravelry" label-for="search-term" description="Example search terms: hat, socks, blanket, etc.">
         <b-form-input id="search-term" v-model="searchTerm" type="text" placeholder="Enter search term" required></b-form-input>
       </b-form-group>
-      <b-button type="submit" variant="primary">Submit</b-button>
+      <b-button type="submit" @click="nextPage">Next Page</b-button>
+      <b-button type="submit" variant="primary" class="ml-2">Search for Patterns</b-button>
     </b-form>
   </div>
 </template>
@@ -19,7 +20,8 @@ export default {
     return {
       searchTerm: '',
       searchResults: [],
-      lastSearchTerm: ''
+      lastSearchTerm: '',
+      page: 1
     }
   },
   methods: {
@@ -33,9 +35,10 @@ export default {
       if(this.searchTerm) {
         let isNewSearch = this.checkForNewSearchTerm();
         if (isNewSearch) {
-          while (this.searchResults.length > 0){
-            this.searchResults.pop();
-          }
+          // clear out the display
+          this.clearSearchResults();
+          // reset our page count
+          this.page = 1;
         }
         this.$emit('searching');
         // build request arguments
@@ -43,7 +46,8 @@ export default {
         let config = {
           params: {
             query: this.searchTerm,
-            page_size: 20
+            page_size: 20,
+            page: this.page
           },
           auth: {
             username: 'd94df3344302c08b7079c71041d90bbb',
@@ -70,6 +74,23 @@ export default {
               this.$emit('search-finished', this.searchResults)
             })
       }
+    },
+    clearSearchResults() {
+      while(this.searchResults.length > 0) {
+        this.searchResults.pop();
+      }
+    },
+    nextPage() {
+      this.page++;
+      this.searchTerm = this.lastSearchTerm;
+      this.clearSearchResults();
+      this.search();
+    },
+    previousPage() {
+      this.page--;
+      this.searchTerm = this.lastSearchTerm;
+      this.clearSearchResults();
+      this.search();
     }
   }
 }
