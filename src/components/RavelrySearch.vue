@@ -4,6 +4,7 @@
       <b-form-group id="search-term-input" label="Search Ravelry" label-for="search-term" description="Example search terms: hat, socks, blanket, etc.">
         <b-form-input id="search-term" v-model="searchTerm" type="text" placeholder="Enter search term" required></b-form-input>
       </b-form-group>
+      <b-button type="submit" @click="previousPage">Previous Page</b-button>
       <b-button type="submit" @click="nextPage">Next Page</b-button>
       <b-button type="submit" variant="primary" class="ml-2">Search for Patterns</b-button>
     </b-form>
