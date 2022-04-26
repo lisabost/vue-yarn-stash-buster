@@ -14,6 +14,9 @@ import {db} from "@/firebase";
 export default {
   name: "YarnDisplayView",
   components: {YarnModal, YarnList},
+  props: {
+    user: {type: Object}
+  },
   data() {
     return {
       modalId: 'add-yarn-modal',
@@ -27,7 +30,7 @@ export default {
   },
   firestore: {
     yarnCollection: db.collection('yarn')
-  }
+  },
 }
 </script>
 

@@ -1,18 +1,27 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h1>Welcome to Stash Buster</h1>
+    <img alt="Yarn ball" src="../assets/free-ball-of-wool.png">
+
+    <b-row>
+      <b-button v-if="authUser" class="m-3">View Your Stash</b-button>
+      <b-button v-else class="m3">Sign in to Manage Your Stash</b-button>
+      <b-button class="m3">Search for Patterns</b-button>
+    </b-row>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+
+
 
 export default {
   name: 'HomeView',
+  props: {
+    authUser: {required: false}
+  },
   components: {
-    HelloWorld
+
   }
 }
 </script>

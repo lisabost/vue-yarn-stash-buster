@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <navigation-header></navigation-header>
+    <navigation-header :auth-user="authUser"></navigation-header>
     <b-container>
       <router-view/>
     </b-container>
@@ -10,11 +10,35 @@
 <script>
 import NavigationHeader from "@/views/NavigationHeader";
 import router from "@/router/router";
+import {firebase} from "@/firebase";
+import User from "@/models/User";
 
 export default {
   name: 'App',
   router,
   components: {NavigationHeader},
+  data() {
+    return {
+      authUser: null,
+    }
+  },
+  methods: {
+
+  },
+  created: function() {
+    firebase.auth().onAuthStateChanged(user => {
+      if(user) {
+        console.log('Signed in as: ', user);
+        console.log('Photo', user.photoURL)
+        this.authUser = new User(user)
+      }
+      else {
+        console.log('Not signed in');
+        this.authUser = null;
+      }
+
+    })
+  }
 }
 </script>
 

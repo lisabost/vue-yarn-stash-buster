@@ -4,7 +4,7 @@
       <b-form-group id="search-term-input" label="Search Ravelry:" label-for="search-term" description="Example search terms: hat, socks, blanket, etc.">
         <b-form-input id="search-term" v-model="searchObject.searchTerm" type="text" placeholder="Enter search term"></b-form-input>
       </b-form-group>
-      <b-form-group v-if="yarnsForSearch" id="search-by-yarn-select" label="Select Your Yarn:" label-for="select-yarn">
+      <b-form-group v-if="yarnsForSearch.length > 0" id="search-by-yarn-select" label="Select Your Yarn:" label-for="select-yarn">
         <b-form-select id="select-yarn" v-model="searchObject.searchLength" :options="yarnSearchOptions"></b-form-select>
       </b-form-group>
       <b-button type="submit" @click="previousPage" class="mt-3">Previous Page</b-button>
