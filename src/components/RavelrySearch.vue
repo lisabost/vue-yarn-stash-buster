@@ -1,12 +1,16 @@
 <template>
   <div>
     <b-form @submit.prevent="search" id="ravelry-search-form" class="mt-3">
-      <b-form-group id="search-term-input" label="Search Ravelry" label-for="search-term" description="Example search terms: hat, socks, blanket, etc.">
-        <b-form-input id="search-term" v-model="searchTerm" type="text" placeholder="Enter search term" required></b-form-input>
+      <b-form-group id="search-term-input" label="Search Ravelry:" label-for="search-term" description="Example search terms: hat, socks, blanket, etc.">
+        <b-form-input id="search-term" v-model="searchObject.searchTerm" type="text" placeholder="Enter search term"></b-form-input>
       </b-form-group>
-      <b-button type="submit" @click="previousPage">Previous Page</b-button>
-      <b-button type="submit" @click="nextPage">Next Page</b-button>
-      <b-button type="submit" variant="primary" class="ml-2">Search for Patterns</b-button>
+      <b-form-group v-if="yarnsForSearch" id="search-by-yarn-select" label="Select Your Yarn:" label-for="select-yarn">
+        <b-form-select id="select-yarn" v-model="searchObject.searchLength" :options="yarnSearchOptions"></b-form-select>
+      </b-form-group>
+      <b-button type="submit" @click="previousPage" class="mt-3">Previous Page</b-button>
+      <b-button type="submit" @click="nextPage" class="ml-2 mt-3">Next Page</b-button>
+      <b-button type="button" @click="newSearch" class="ml-2 mt-3">New Search</b-button>
+      <b-button type="submit" variant="primary" class="ml-2 mt-3 float-right">Search for Patterns</b-button>
     </b-form>
   </div>
 </template>
@@ -16,25 +20,36 @@ import axios from 'axios';
 
 export default {
   name: "RavelrySearch",
-  props: {},
+  props: {
+    listOfYarns: Array
+  },
   data() {
     return {
-      searchTerm: '',
+      searchObject: {
+        searchTerm: '',
+        searchLength: '',
+      },
       searchResults: [],
       lastSearchTerm: '',
-      page: 1
+      lastSearchLength: '',
+      page: 1,
+      yarnsForSearch : [],
+      selectedYarn: Object,
+      searchList: []
     }
   },
   methods: {
-    checkForNewSearchTerm() {
-      if(this.searchTerm !== this.lastSearchTerm) {
-        this.lastSearchTerm = this.searchTerm;
+    checkForNewSearch() {
+      // if the search term is new or the search length is new clear out results for new results!
+      if(this.searchObject.searchTerm !== this.lastSearchTerm || this.searchObject.searchLength !== this.lastSearchLength) {
         return true;
       }
+      this.lastSearchTerm = this.searchObject.searchTerm;
+      this.lastSearchLength = this.searchObject.searchLength;
     },
     search() {
-      if(this.searchTerm) {
-        let isNewSearch = this.checkForNewSearchTerm();
+      // if(this.searchObject.searchTerm) {
+        let isNewSearch = this.checkForNewSearch();
         if (isNewSearch) {
           // clear out the display
           this.clearSearchResults();
@@ -46,7 +61,8 @@ export default {
         let url = 'https://api.ravelry.com/patterns/search.json';
         let config = {
           params: {
-            query: this.searchTerm,
+            query: this.searchObject.searchTerm,
+            yardage_max: this.searchObject.searchLength,
             page_size: 20,
             page: this.page
           },
@@ -74,7 +90,15 @@ export default {
             .finally(() => {
               this.$emit('search-finished', this.searchResults)
             })
-      }
+      // }
+    },
+    newSearch() {
+      //clear form
+      this.searchObject.searchTerm = '';
+      this.searchObject.searchLength = '';
+      //clear results
+      this.clearSearchResults();
+      this.$emit('clear', this.searchResults);
     },
     clearSearchResults() {
       while(this.searchResults.length > 0) {
@@ -83,15 +107,31 @@ export default {
     },
     nextPage() {
       this.page++;
-      this.searchTerm = this.lastSearchTerm;
+      this.searchObject.searchTerm = this.lastSearchTerm;
+      this.searchObject.searchLength = this.lastSearchLength;
       this.clearSearchResults();
       this.search();
     },
     previousPage() {
       this.page--;
-      this.searchTerm = this.lastSearchTerm;
+      this.searchObject.searchTerm = this.lastSearchTerm;
+      this.searchObject.searchLength = this.lastSearchLength;
       this.clearSearchResults();
       this.search();
+    }
+  },
+  computed : {
+    yarnSearchOptions: function (){
+      let yarns = [];
+      for (const i in this.yarnsForSearch) {
+        yarns.push({text: this.yarnsForSearch[i].name + ', ' + this.yarnsForSearch[i].color, value: this.yarnsForSearch[i].length});
+      }
+      return yarns;
+    }
+  },
+  mounted() {
+    if(this.$route.params.listOfYarns) {
+      this.yarnsForSearch = this.$route.params.listOfYarns;
     }
   }
 }

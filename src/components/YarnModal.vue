@@ -41,7 +41,8 @@ export default {
     okButtonText: {type: String},
     modalId: {type: String},
     currentlyEditing: {type: Boolean},
-    yarnId: {type: String}
+    yarnId: {type: String},
+    yarnBeingEdited: {type: Object}
   },
   data() {
     return {

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ravelry-search @search-finished="displaySearchResults"></ravelry-search>
+    <ravelry-search @search-finished="displaySearchResults" @clear="clearResults"></ravelry-search>
     <search-results-display :searchResults="displayResults"></search-results-display>
   </div>
 </template>

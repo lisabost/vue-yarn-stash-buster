@@ -6,13 +6,14 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
-    name: 'Search',
-    component: RavelrySearchView
+    path: '/search',
+    name: 'search',
+    component: RavelrySearchView,
+    props: true
   },
   {
-    path: '/stash',
-    name: 'Yarn Stash',
+    path: '/',
+    name: 'yarn stash',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.

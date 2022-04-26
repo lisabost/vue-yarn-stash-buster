@@ -7,19 +7,17 @@
 </template>
 
 <script>
-import {db} from "@/firebase";
 import YarnCard from "@/components/YarnCard";
 
 export default {
   name: "YarnList",
   components: {YarnCard},
+  props: {
+    yarnCollection: {type: Array},
+  },
   data() {
     return {
-      yarnCollection: []
     }
-  },
-  firestore: {
-    yarnCollection: db.collection('yarn')
   },
   methods: {
   }

@@ -9,8 +9,8 @@
 
 <script>
 import NavigationHeader from "@/views/NavigationHeader";
-// import Pattern from "@/models/Pattern";
 import router from "@/router/router";
+
 export default {
   name: 'App',
   router,
