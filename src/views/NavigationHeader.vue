@@ -6,7 +6,7 @@
 
     <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav>
-        <b-nav-item to="/">Yarn Stash</b-nav-item>
+        <b-nav-item to="/stash">Yarn Stash</b-nav-item>
         <b-nav-item to="/search">Search</b-nav-item>
       </b-navbar-nav>
 

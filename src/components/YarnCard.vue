@@ -20,13 +20,12 @@
     </template>
     <template v-slot:footer>
       <b-row>
-        <b-col>
-          <yarn-modal :ok-button-text="'Edit Yarn'" :currently-editing="true" :yarn-being-edited="yarn" :modalId="getModalId" :yarnId="yarn.id">Edit Yarn</yarn-modal>
-        </b-col>
-        <b-col>
-          <b-button class="btn-danger delete-button" @click="removeYarn">Delete Yarn</b-button>
-        </b-col>
+        <b-button @click="findAPattern(yarn)" class="my-3">Find a Pattern!</b-button>
+        <yarn-modal :ok-button-text="'Edit Yarn'" :currently-editing="true" :yarn-being-edited="yarn" :modalId="getModalId" :yarnId="yarn.id" class="ml-3">Edit Yarn</yarn-modal>
+
+        <b-button class="btn-danger my-3 delete-button float-right ml-3" @click="removeYarn">Delete Yarn</b-button>
       </b-row>
+
     </template>
   </card-body>
 </template>
@@ -35,6 +34,7 @@
 import CardBody from "@/components/CardBody";
 import {db, storage} from "@/firebase";
 import YarnModal from "@/components/YarnModal";
+import {makeToast} from "@/mixins/makeToast";
 export default {
   name: "YarnCard",
   data() {
@@ -45,6 +45,7 @@ export default {
   props: {
     yarn: {type: Object, required: true}
   },
+  mixins: [makeToast],
   methods: {
     removeYarn() {
       console.log(this.yarn);
@@ -66,13 +67,10 @@ export default {
           this.makeToast('Error deleting yarn', 'Error!', 'danger');
         })
     },
-    makeToast(message, title, color) {
-      this.$bvToast.toast(message), {
-        title: title,
-        autoHideDelay: 3000,
-        variant: color
-      }
-    }
+    findAPattern(yarn) {
+      console.log('The yarn I clicked on is: ' + yarn)
+      this.$router.push({name: 'search', params: {searchWithYarn: yarn}})
+    },
   },
   computed: {
     getModalId() {
@@ -83,12 +81,12 @@ export default {
 </script>
 
 <style scoped>
-.delete-button {
-  margin: 0;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-}
+/*.delete-button {*/
+/*  margin: 0;*/
+/*  position: absolute;*/
+/*  top: 50%;*/
+/*  left: 50%;*/
+/*  -ms-transform: translate(-50%, -50%);*/
+/*  transform: translate(-50%, -50%);*/
+/*}*/
 </style>

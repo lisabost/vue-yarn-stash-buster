@@ -34,6 +34,7 @@
 <script>
 import {db, storage} from "@/firebase";
 import Yarn from "@/models/Yarn";
+import {makeToast} from "@/mixins/makeToast";
 
 export default {
   name: "YarnModal",
@@ -65,6 +66,7 @@ export default {
       message: ''
     }
   },
+  mixins: [makeToast],
   methods: {
     createOrEditYarn() {
       if(this.currentlyEditing) {
@@ -186,14 +188,6 @@ export default {
       //report success
       this.makeToast('Yarn edited successfully!', 'Success!', 'success')
     },
-    makeToast(message, title, color) {
-      this.$bvToast.toast(message, {
-        title: title,
-        autoHideDelay: 3000,
-        variant: color,
-        appendToast: true
-      })
-    }
   },
   computed: {
   }

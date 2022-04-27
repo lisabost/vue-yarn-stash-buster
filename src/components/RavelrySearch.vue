@@ -4,9 +4,7 @@
       <b-form-group id="search-term-input" label="Search Ravelry:" label-for="search-term" description="Example search terms: hat, socks, blanket, etc.">
         <b-form-input id="search-term" v-model="searchObject.searchTerm" type="text" placeholder="Enter search term"></b-form-input>
       </b-form-group>
-      <b-form-group v-if="yarnsForSearch.length > 0" id="search-by-yarn-select" label="Select Your Yarn:" label-for="select-yarn">
-        <b-form-select id="select-yarn" v-model="searchObject.searchLength" :options="yarnSearchOptions"></b-form-select>
-      </b-form-group>
+      <p v-if="yarnForSearch != null">You are searching for patterns with: {{yarnForSearch.name}}, {{yarnForSearch.color}}</p>
       <b-button type="submit" @click="previousPage" class="mt-3">Previous Page</b-button>
       <b-button type="submit" @click="nextPage" class="ml-2 mt-3">Next Page</b-button>
       <b-button type="button" @click="newSearch" class="ml-2 mt-3">New Search</b-button>
@@ -21,7 +19,7 @@ import axios from 'axios';
 export default {
   name: "RavelrySearch",
   props: {
-    listOfYarns: Array
+    searchWithYarn: Object
   },
   data() {
     return {
@@ -33,9 +31,9 @@ export default {
       lastSearchTerm: '',
       lastSearchLength: '',
       page: 1,
-      yarnsForSearch : [],
       selectedYarn: Object,
-      searchList: []
+      searchList: [],
+      yarnForSearch: null
     }
   },
   methods: {
@@ -121,17 +119,14 @@ export default {
     }
   },
   computed : {
-    yarnSearchOptions: function (){
-      let yarns = [];
-      for (const i in this.yarnsForSearch) {
-        yarns.push({text: this.yarnsForSearch[i].name + ', ' + this.yarnsForSearch[i].color, value: this.yarnsForSearch[i].length});
-      }
-      return yarns;
-    }
+
   },
   mounted() {
-    if(this.$route.params.listOfYarns) {
-      this.yarnsForSearch = this.$route.params.listOfYarns;
+    if(this.$route.params.searchWithYarn) {
+      // store the yarn from the route, so we can display it to the user
+      this.yarnForSearch = this.$route.params.searchWithYarn;
+      // put the length into our search object for our search
+      this.searchObject.searchLength = this.$route.params.searchWithYarn.length;
     }
   }
 }

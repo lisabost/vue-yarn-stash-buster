@@ -2,7 +2,7 @@
   <b-card class="my-2 reusable-card">
     <b-card-header class="card-header"><slot name="header"></slot></b-card-header>
     <slot></slot>
-    <footer class="sticky-footer text-center"><slot name="footer"></slot></footer>
+    <footer class="sticky-footer"><slot name="footer"></slot></footer>
   </b-card>
 </template>
 
@@ -14,9 +14,10 @@ export default {
 
 <style scoped>
 .sticky-footer {
+  padding-left: 3em;
   position: absolute;
   bottom: 0;
-  width: 80%;
+  width: 100%;
   justify-content: center;
 }
 .reusable-card {
