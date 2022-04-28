@@ -2,7 +2,7 @@
   <div id="app">
     <navigation-header :auth-user="authUser"></navigation-header>
     <b-container>
-      <router-view/>
+      <router-view :auth-user="authUser"></router-view>
     </b-container>
   </div>
 </template>
@@ -29,7 +29,6 @@ export default {
     firebase.auth().onAuthStateChanged(user => {
       if(user) {
         console.log('Signed in as: ', user);
-        console.log('Photo', user.photoURL)
         this.authUser = new User(user)
       }
       else {

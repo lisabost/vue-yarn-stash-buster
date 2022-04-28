@@ -6,7 +6,7 @@
     <b-row>
       <b-button v-if="authUser" class="mt-3">View Your Stash</b-button>
       <b-button v-else class="mt-3 ml-3">Sign in to Manage Your Stash</b-button>
-      <b-button class="ml-3 mt-3">Search for Patterns</b-button>
+      <b-button class="ml-3 mt-3" @click="redirectToSearch">Search for Patterns</b-button>
     </b-row>
   </div>
 </template>
@@ -22,6 +22,11 @@ export default {
   },
   components: {
 
+  },
+  methods: {
+    redirectToSearch() {
+      this.$router.push('search');
+    }
   }
 }
 </script>

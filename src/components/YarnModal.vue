@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="create-yarn-modal">
     <b-button @click="$bvModal.show(modalId)" class="btn-primary my-3"><slot></slot></b-button>
     <b-modal scrollable centered @ok.prevent="createOrEditYarn" :ok-title="okButtonText" title="Add Yarn to Stash" :id="modalId">
       <template>
@@ -23,7 +23,7 @@
             <b-form-input id="fiber" v-model="newYarn.yarn.fiber"></b-form-input>
           </b-form-group>
           <b-form-group label="Image:" label-for="image">
-            <b-form-file id="image" v-model="newYarn.image" ref="newImage"></b-form-file>
+            <b-form-file id="image" v-model="newYarn.yarn.image" ref="newImage"></b-form-file>
           </b-form-group>
         </b-form>
       </template>
@@ -43,7 +43,8 @@ export default {
     modalId: {type: String},
     currentlyEditing: {type: Boolean},
     yarnId: {type: String},
-    yarnBeingEdited: {type: Object}
+    yarn: {type: Object},
+    authUser: {required: true},
   },
   data() {
     return {
@@ -60,7 +61,7 @@ export default {
         {value: 'jumbo', text: 'Jumbo'},
       ],
       newYarn: {
-        yarn: new Yarn(),
+        yarn: this.yarn ?? new Yarn(),
         image: null,
       },
       message: ''
@@ -68,6 +69,7 @@ export default {
   },
   mixins: [makeToast],
   methods: {
+
     createOrEditYarn() {
       if(this.currentlyEditing) {
         this.editYarn();
@@ -78,7 +80,7 @@ export default {
     },
     saveNewYarn() {
       // Add yarn to stash
-      db.collection(Yarn.collectionName)
+      db.collection('crafters').doc(this.authUser.uid).collection(Yarn.collectionName)
         .add(this.newYarn.yarn.toFirestore())
         .then(docRef => {
           console.log('Yarn added', docRef)
@@ -139,7 +141,7 @@ export default {
             // get the image url to update the yarn document
             return snapshot.ref.getDownloadURL();
           })
-          .then(url => db.collection('yarn').doc(docId).update({image: url}))
+          .then(url => db.collection('crafters').doc(this.authUser.uid).collection('yarn').doc(docId).update({image: url}))
           .then(docRef => console.log('Yarn Updated', docRef))
           .catch(error => {
             console.error('Error updating yarn' , error, )
@@ -150,7 +152,7 @@ export default {
     },
     editYarn() {
       // update the document
-      db.collection(Yarn.collectionName).doc(this.yarnId)
+      db.collection('crafters').doc(this.authUser.uid).collection(Yarn.collectionName).doc(this.yarnId)
           .update(this.newYarn.yarn.toFirestore())
           .then(docRef => {
             console.log('Yarn updated', docRef)
@@ -173,7 +175,7 @@ export default {
                 // get the image url to update the yarn document
                 return snapshot.ref.getDownloadURL();
               })
-              .then(url => db.collection('yarn').doc(this.yarnId).update({image: url}))
+              .then(url => db.collection('crafters').doc(this.authUser.uid).collection('yarn').doc(this.yarnId).update({image: url}))
               .then(docRef => console.log('Yarn Updated', docRef))
               .catch(error => {
                 console.error('Error updating image' , error)

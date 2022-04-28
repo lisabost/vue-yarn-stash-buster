@@ -1,32 +1,38 @@
 <template>
-  <div>
-    <yarn-modal :ok-button-text="'Add Yarn'" :modalId="modalId">Add Yarn to Your Stash</yarn-modal>
-    <yarn-list :yarn-collection="yarnCollection"></yarn-list>
+  <div class="yarn-stash-page">
+    <h2 class="mt-2">Yarn Stash</h2>
+    <div v-if="loggedIn">
+      <yarn-modal :authUser="authUser" :ok-button-text="'Add Yarn'" :modalId="modalId">Add Yarn to Your Stash</yarn-modal>
+      <user-yarn-list :authUser="authUser"></user-yarn-list>
+    </div>
+    <div v-else>
+      <b-alert variant="danger" class="mt-5 w-100" show>Please log in to see your stash.</b-alert>
+    </div>
   </div>
 </template>
 
 <script>
-import YarnList from "@/components/YarnList";
 import YarnModal from "@/components/YarnModal";
-import {db} from "@/firebase";
+import UserYarnList from "@/components/UserYarnList";
 
 export default {
   name: "YarnDisplayView",
-  components: {YarnModal, YarnList},
+  components: {UserYarnList, YarnModal},
   props: {
-    user: {type: Object}
+    authUser: {required: true},
   },
   data() {
     return {
       modalId: 'add-yarn-modal',
-      yarnCollection: [],
     }
   },
   methods: {
 
   },
-  firestore: {
-    yarnCollection: db.collection('yarn')
+  computed: {
+    loggedIn() {
+      return (this.authUser && this.authUser.uid);
+    }
   },
 }
 </script>

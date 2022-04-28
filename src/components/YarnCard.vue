@@ -21,11 +21,10 @@
     <template v-slot:footer>
       <b-row>
         <b-button @click="findAPattern(yarn)" class="my-3">Find a Pattern!</b-button>
-        <yarn-modal :ok-button-text="'Edit Yarn'" :currently-editing="true" :yarn-being-edited="yarn" :modalId="getModalId" :yarnId="yarn.id" class="ml-3">Edit Yarn</yarn-modal>
-
+        <yarn-modal :auth-user="authUser" :ok-button-text="'Edit Yarn'" :currently-editing="true"
+                    :yarn="yarn" :modalId="getModalId" :yarnId="yarn.id" class="ml-3">Edit Yarn</yarn-modal>
         <b-button class="btn-danger my-3 delete-button float-right ml-3" @click="removeYarn">Delete Yarn</b-button>
       </b-row>
-
     </template>
   </card-body>
 </template>
@@ -43,14 +42,14 @@ export default {
   },
   components: {YarnModal, CardBody},
   props: {
-    yarn: {type: Object, required: true}
+    yarn: {type: Object, required: true},
+    authUser: {required: true},
   },
   mixins: [makeToast],
   methods: {
     removeYarn() {
-      console.log(this.yarn);
       // remove image from storage
-      if (storage.child('yarn').child(this.yarn.id)) {
+      if(this.yarn.image) {
         storage.child('yarn').child(this.yarn.id)
             .delete()
             .catch(error => {
@@ -59,7 +58,7 @@ export default {
             });
       }
       // remove yarn from database
-      db.collection('yarn')
+      db.collection('crafters').doc(this.authUser.uid).collection('yarn')
         .doc(this.yarn.id)
         .delete()
         .catch(error => {

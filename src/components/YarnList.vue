@@ -1,7 +1,7 @@
 <template>
   <b-row>
     <b-col deck v-for="(yarn, i) in yarnCollection" :key="i" class="col-12 col-md-6 yarn-card-deck">
-      <yarn-card class="yarn-card" :yarn="yarn"></yarn-card>
+      <yarn-card :authUser="authUser" class="yarn-card" :yarn="yarn"></yarn-card>
     </b-col>
   </b-row>
 </template>
@@ -14,12 +14,14 @@ export default {
   components: {YarnCard},
   props: {
     yarnCollection: {type: Array},
+    authUser: {required: true},
   },
   data() {
     return {
     }
   },
   methods: {
+
   }
 }
 </script>
