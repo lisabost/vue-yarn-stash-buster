@@ -19,7 +19,7 @@
       </b-card-text>
     </template>
     <template v-slot:footer>
-      <b-row>
+      <b-row class="yarn-button-row d-flex flex-row justify-content-around">
         <b-button @click="findAPattern(yarn)" class="my-3">Find a Pattern!</b-button>
         <yarn-modal :auth-user="authUser" :ok-button-text="'Edit Yarn'" :currently-editing="true"
                     :yarn="yarn" :modalId="getModalId" :yarnId="yarn.id" class="ml-3">Edit Yarn</yarn-modal>
@@ -80,12 +80,8 @@ export default {
 </script>
 
 <style scoped>
-/*.delete-button {*/
-/*  margin: 0;*/
-/*  position: absolute;*/
-/*  top: 50%;*/
-/*  left: 50%;*/
-/*  -ms-transform: translate(-50%, -50%);*/
-/*  transform: translate(-50%, -50%);*/
-/*}*/
+.yarn-button-row {
+  margin-right: 0;
+  margin-left: 0;
+}
 </style>

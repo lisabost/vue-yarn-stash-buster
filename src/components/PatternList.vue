@@ -6,9 +6,15 @@
           <b-card-img class="pattern-image" :src="pattern.first_photo.medium_url" :alt="pattern.name"></b-card-img>
           <b-card-title>{{pattern.name}}</b-card-title>
           <b-card-sub-title>Designer: {{pattern.designer.name}}</b-card-sub-title>
+          <div class="buttons d-flex flex-row justify-content-left">
+
+          </div>
         </template>
         <template v-slot:footer>
-          <more-details-modal :item="pattern">More Details</more-details-modal>
+          <b-row class="footer-buttons d-flex flex-row justify-content-between">
+            <b-icon icon="heart" class="border rounded" font-scale="2"></b-icon>
+            <more-details-modal :item="pattern">More Details</more-details-modal>
+          </b-row>
         </template>
       </card-body>
     </b-card-group>
@@ -31,5 +37,10 @@ export default {
 .pattern-image {
   max-height: 200px;
   object-fit: cover;
+}
+.footer-buttons {
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 0;
 }
 </style>

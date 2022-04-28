@@ -14,7 +14,6 @@ export default {
 
 <style scoped>
 .sticky-footer {
-  padding-left: 3em;
   position: absolute;
   bottom: 0;
   width: 100%;
