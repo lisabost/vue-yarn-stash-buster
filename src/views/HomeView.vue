@@ -4,8 +4,8 @@
     <img alt="Yarn ball" src="../assets/free-ball-of-wool.png">
 
     <b-row>
-      <b-button v-if="authUser" class="mt-3">View Your Stash</b-button>
-      <b-button v-else class="mt-3 ml-3">Sign in to Manage Your Stash</b-button>
+      <b-button v-if="authUser" class="mt-3" @click="viewStash">View Your Stash</b-button>
+      <b-button v-else class="mt-3 ml-3" @click="login">Sign in to Manage Your Stash</b-button>
       <b-button class="ml-3 mt-3" @click="redirectToSearch">Search for Patterns</b-button>
     </b-row>
   </div>
@@ -14,6 +14,8 @@
 <script>
 
 
+import {auth, firebase} from "@/firebase";
+import {makeToast} from "@/mixins/makeToast";
 
 export default {
   name: 'HomeView',
@@ -26,7 +28,21 @@ export default {
   methods: {
     redirectToSearch() {
       this.$router.push('search');
+    },
+    login() {
+      let provider = new firebase.auth.GoogleAuthProvider();
+
+      auth.signInWithPopup(provider)
+          .catch(error => {
+            console.error('Error logging in', error);
+            this.makeToast('Error logging in', 'Log in Failed', 'danger')
+          });
+      this.viewStash();
+    },
+    viewStash() {
+      this.$router.push('stash');
     }
-  }
+  },
+  mixins: [makeToast],
 }
 </script>
