@@ -1,6 +1,6 @@
 <template>
   <div class="search-results-display">
-    <pattern-list :patterns="searchResults"></pattern-list>
+    <pattern-list :patterns="searchResults" @add-to-favorites="addToFavorites"></pattern-list>
   </div>
 </template>
 
@@ -11,6 +11,11 @@ export default {
   components: {PatternList},
   props: {
     searchResults: {type: Array}
+  },
+  methods: {
+    addToFavorites(pattern) {
+      this.$emit('add-to-favorites', pattern);
+    }
   }
 }
 </script>

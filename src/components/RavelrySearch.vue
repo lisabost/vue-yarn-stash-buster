@@ -4,7 +4,7 @@
       <b-form-group id="search-term-input" label="Search Ravelry:" label-for="search-term" description="Example search terms: hat, socks, blanket, etc.">
         <b-form-input id="search-term" v-model="searchObject.searchTerm" type="text" placeholder="Enter search term"></b-form-input>
       </b-form-group>
-      <p v-if="yarnForSearch != null">You are searching for patterns with: {{yarnForSearch.name}}, {{yarnForSearch.color}}</p>
+      <p v-if="yarnForSearch">You are searching for patterns with: {{yarnForSearch.name}}, {{yarnForSearch.color}}</p>
       <b-button type="submit" @click="previousPage" class="mt-3">Previous Page</b-button>
       <b-button type="submit" @click="nextPage" class="ml-2 mt-3">Next Page</b-button>
       <b-button type="button" @click="newSearch" class="ml-2 mt-3">New Search</b-button>
@@ -33,7 +33,7 @@ export default {
       page: 1,
       selectedYarn: Object,
       searchList: [],
-      yarnForSearch: null
+      yarnForSearch: Object
     }
   },
   methods: {
