@@ -4,9 +4,9 @@
       <card-body>
 
         <template>
-          <b-card-img class="pattern-image" :src="pattern.first_photo.medium_url" :alt="pattern.name"></b-card-img>
+          <b-card-img class="pattern-image" :src="pattern.photos[0].medium_url" :alt="pattern.name"></b-card-img>
           <b-card-title>{{pattern.name}}</b-card-title>
-          <b-card-sub-title>Designer: {{pattern.designer.name}}</b-card-sub-title>
+          <b-card-sub-title>Designer: {{pattern.pattern_author.name}}</b-card-sub-title>
         </template>
 
         <template v-slot:footer>
@@ -40,7 +40,7 @@ export default {
 
 <style scoped>
 .pattern-image {
-  max-height: 200px;
+  height: 200px;
   object-fit: cover;
 }
 .footer-buttons {

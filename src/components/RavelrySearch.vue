@@ -5,8 +5,8 @@
         <b-form-input id="search-term" v-model="searchObject.searchTerm" type="text" placeholder="Enter search term"></b-form-input>
       </b-form-group>
       <p v-if="yarnForSearch">You are searching for patterns with: {{yarnForSearch.name}}, {{yarnForSearch.color}}</p>
-      <b-button type="submit" @click="previousPage" class="mt-3">Previous Page</b-button>
-      <b-button type="submit" @click="nextPage" class="ml-2 mt-3">Next Page</b-button>
+      <b-button type="button" @click="previousPage" class="mt-3">Previous Page</b-button>
+      <b-button type="button" @click="nextPage" class="ml-2 mt-3">Next Page</b-button>
       <b-button type="button" @click="newSearch" class="ml-2 mt-3">New Search</b-button>
       <b-button type="submit" variant="primary" class="ml-2 mt-3 float-right">Search for Patterns</b-button>
     </b-form>
@@ -15,11 +15,13 @@
 
 <script>
 import axios from 'axios';
+import {makeToast} from "@/mixins/makeToast";
+import Pattern from "@/models/Pattern";
 
 export default {
   name: "RavelrySearch",
   props: {
-    searchWithYarn: Object
+    searchWithYarn: Object,
   },
   data() {
     return {
@@ -30,12 +32,17 @@ export default {
       searchResults: [],
       lastSearchTerm: '',
       lastSearchLength: '',
-      page: 1,
-      selectedYarn: Object,
       searchList: [],
-      yarnForSearch: Object
+      yarnForSearch: null,
+      page: 1,
+      detailedResults: [],
+      newPatternWithDetails : {
+        pattern: null,
+        details: null,
+      }
     }
   },
+  mixins: [makeToast],
   methods: {
     checkForNewSearch() {
       // if the search term is new or the search length is new clear out results for new results!
@@ -46,13 +53,12 @@ export default {
       this.lastSearchLength = this.searchObject.searchLength;
     },
     search() {
-      // if(this.searchObject.searchTerm) {
         let isNewSearch = this.checkForNewSearch();
         if (isNewSearch) {
           // clear out the display
           this.clearSearchResults();
           // reset our page count
-          this.page = 1;
+          this.$emit('page-reset');
         }
         this.$emit('searching');
         // build request arguments
@@ -71,24 +77,55 @@ export default {
         }
         // execute ajax request using promises
         axios.get(url, config)
-            .then(response => {
-              if(response.data.patterns.length > 0) {
-                for (const i in response.data.patterns) {
-                  this.searchResults.push(response.data.patterns[i]);
-                }
-              } else {
-                this.searchResults = [];
-                this.$emit('no-search-results-found');
+          .then(response => {
+            if(response.data.patterns.length > 0) {
+              for (const i in response.data.patterns) {
+                // put our data in our results array
+                this.searchResults.push(response.data.patterns[i]);
               }
-            })
-            .catch(error => {
-              console.log('AJAX SEARCH ERROR', error);
-              // TODO: Put error message into toast for user
-            })
-            .finally(() => {
-              this.$emit('search-finished', this.searchResults)
-            })
-      // }
+              for (const i in this.searchResults) {
+                let patternId = this.searchResults[i].id;
+                console.log('the pattern id id: ' + patternId);
+                this.getDetailInformation(patternId);
+              }
+            } else {
+              this.searchResults = [];
+              this.$emit('no-search-results-found');
+            }
+          })
+          .catch(error => {
+            console.log('AJAX SEARCH ERROR', error);
+            // Put error message into toast for user
+            this.makeToast('AJAX search error', 'AJAX search Failure', 'danger');
+          })
+          .finally(() => {
+            for (const i in this.detailedResults) {
+              console.log(this.detailedResults[i]);
+            }
+            this.$emit('search-finished', this.detailedResults)
+          })
+    },
+    getDetailInformation(id) {
+      let detailInfo;
+      //build our second search config
+      let url = `https://api.ravelry.com/patterns/${id}.json`;
+      let config = {
+        auth: {
+          username: 'd94df3344302c08b7079c71041d90bbb',
+          password: '01-eZUS5Q6kykGn0bribecD3ARfRU8stkMuOVi2I'
+        }
+      }
+      axios.get(url, config)
+          .then(response => {
+            if(response.data.pattern !== null){
+              // put details in another temp variable
+              detailInfo = response.data.pattern;
+            }
+            this.detailedResults.push(Object.assign(new Pattern, detailInfo))
+          })
+          .catch(error => {
+            console.error('ERROR WITH NESTED AJAX CALL', error);
+          })
     },
     newSearch() {
       //clear form
@@ -111,7 +148,9 @@ export default {
       this.search();
     },
     previousPage() {
-      this.page--;
+      if(this.page > 1) {
+        this.page--;
+      }
       this.searchObject.searchTerm = this.lastSearchTerm;
       this.searchObject.searchLength = this.lastSearchLength;
       this.clearSearchResults();

@@ -16,7 +16,7 @@ export default {
     addToFavorites(pattern) {
       this.$emit('add-to-favorites', pattern);
     }
-  }
+  },
 }
 </script>
 

@@ -8,7 +8,6 @@
 <script>
 import SearchResultsDisplay from "@/components/SearchResultsDisplay";
 import RavelrySearch from "@/components/RavelrySearch";
-import Pattern from "@/models/Pattern";
 
 export default {
   name: "RavelrySearchView",
@@ -24,14 +23,14 @@ export default {
         this.clearResults();
       }
       for (const i in searchResults) {
-        this.displayResults.push(Object.assign(new Pattern, searchResults[i]))
+        this.displayResults.push(searchResults[i])
       }
     },
     clearResults() {
       while(this.displayResults.length > 0) {
         this.displayResults.pop();
       }
-    }
+    },
   }
 }
 </script>
