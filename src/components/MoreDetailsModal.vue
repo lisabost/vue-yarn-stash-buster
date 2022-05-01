@@ -19,10 +19,9 @@
 
 export default {
   name: "MoreDetailsModal",
-  props: {item: {type: Object}},
+  props: {pattern: {type: Object}},
   data() {
     return {
-      pattern: Object
     }
   },
   methods: {

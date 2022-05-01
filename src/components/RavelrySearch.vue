@@ -27,7 +27,6 @@ export default {
     return {
       searchObject: {
         searchTerm: '',
-        searchLength: '',
       },
       searchResults: [],
       lastSearchTerm: '',
@@ -45,12 +44,11 @@ export default {
   mixins: [makeToast],
   methods: {
     checkForNewSearch() {
-      // if the search term is new or the search length is new clear out results for new results!
-      if(this.searchObject.searchTerm !== this.lastSearchTerm || this.searchObject.searchLength !== this.lastSearchLength) {
+      // if the search term is new or the search length is new clear out results for new results
+      if(this.searchObject.searchTerm !== this.lastSearchTerm) {
         return true;
       }
       this.lastSearchTerm = this.searchObject.searchTerm;
-      this.lastSearchLength = this.searchObject.searchLength;
     },
     search() {
         let isNewSearch = this.checkForNewSearch();
@@ -81,13 +79,9 @@ export default {
             if(response.data.patterns.length > 0) {
               for (const i in response.data.patterns) {
                 // put our data in our results array
-                this.searchResults.push(response.data.patterns[i]);
+                this.searchResults.push(response.data.patterns[i].id);
               }
-              for (const i in this.searchResults) {
-                let patternId = this.searchResults[i].id;
-                console.log('the pattern id id: ' + patternId);
-                this.getDetailInformation(patternId);
-              }
+              this.getDetailedInformation();
             } else {
               this.searchResults = [];
               this.$emit('no-search-results-found');
@@ -98,34 +92,20 @@ export default {
             // Put error message into toast for user
             this.makeToast('AJAX search error', 'AJAX search Failure', 'danger');
           })
-          .finally(() => {
-            for (const i in this.detailedResults) {
-              console.log(this.detailedResults[i]);
-            }
-            this.$emit('search-finished', this.detailedResults)
-          })
     },
-    getDetailInformation(id) {
-      let detailInfo;
-      //build our second search config
-      let url = `https://api.ravelry.com/patterns/${id}.json`;
-      let config = {
-        auth: {
-          username: 'd94df3344302c08b7079c71041d90bbb',
-          password: '01-eZUS5Q6kykGn0bribecD3ARfRU8stkMuOVi2I'
-        }
-      }
-      axios.get(url, config)
-          .then(response => {
-            if(response.data.pattern !== null){
-              // put details in another temp variable
-              detailInfo = response.data.pattern;
-            }
-            this.detailedResults.push(Object.assign(new Pattern, detailInfo))
+    async getDetailedInformation() {
+      await Promise.all(
+          this.searchResults.map(async (id) => {
+            const response = await axios.get(`https://api.ravelry.com/patterns/${id}.json`,
+                  {auth: {
+                      username: 'd94df3344302c08b7079c71041d90bbb',
+                      password: '01-eZUS5Q6kykGn0bribecD3ARfRU8stkMuOVi2I'
+                    }})
+            // console.log(response.data.pattern)
+            this.detailedResults.push(Object.assign(new Pattern, response.data.pattern));
           })
-          .catch(error => {
-            console.error('ERROR WITH NESTED AJAX CALL', error);
-          })
+      )
+      this.$emit('search-finished', this.detailedResults)
     },
     newSearch() {
       //clear form
