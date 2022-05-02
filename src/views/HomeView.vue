@@ -1,9 +1,11 @@
 <template>
   <div class="home">
     <h1>Welcome to Stash Buster</h1>
-    <img alt="Yarn ball" src="../assets/free-ball-of-wool.png">
+    <div class="image-holder">
+      <img alt="Yarn ball" src="../assets/free-ball-of-wool.png" class="mx-auto d-block">
+    </div>
 
-    <b-row>
+    <b-row class="d-flex flex-row justify-content-around button-row">
       <b-button v-if="authUser" class="mt-3" @click="viewStash">View Your Stash</b-button>
       <b-button v-else class="mt-3 ml-3" @click="login">Sign in to Manage Your Stash</b-button>
       <b-button class="ml-3 mt-3" @click="redirectToSearch">Search for Patterns</b-button>
