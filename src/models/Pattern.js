@@ -48,6 +48,24 @@ function Pattern() {
     this.craft = {};
     this.pattern_categories = [];
     this.pattern_attributes = [];
+
+    this.toString = function() {
+        return this.name;
+    }
+
+    this.toFirestore = function() {
+        return {
+            name: this.name,
+            pattern_author: this.pattern_author,
+            photos: this.photos,
+            permalink: this.permalink,
+            notes: this.notes_html,
+            price: this.price,
+            currency: this.currency,
+            yardage: this.yardage,
+            weight: this.yarn_weight
+        }
+    }
 }
 
 export default Pattern;

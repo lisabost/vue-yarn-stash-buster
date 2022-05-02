@@ -1,6 +1,6 @@
 <template>
   <div class="search-results-display">
-    <pattern-list :patterns="searchResults" @add-to-favorites="addToFavorites"></pattern-list>
+    <pattern-list :patterns="searchResults" @add-to-favorites="addToFavorites" :authUser="authUser"></pattern-list>
   </div>
 </template>
 
@@ -10,7 +10,8 @@ export default {
   name: "SearchResultsDisplay",
   components: {PatternList},
   props: {
-    searchResults: {type: Array}
+    searchResults: {type: Array},
+    authUser: {required: false},
   },
   methods: {
     addToFavorites(pattern) {

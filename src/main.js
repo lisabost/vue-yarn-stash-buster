@@ -3,7 +3,8 @@ import App from './App.vue'
 import routes from './router/router'
 import { BootstrapVue, BootstrapVueIcons } from 'bootstrap-vue'
 
-import 'bootstrap/dist/css/bootstrap.css'
+// import 'bootstrap/dist/css/bootstrap.css'
+import '@/assets/style/app.scss'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import {firestorePlugin} from "vuefire";
 

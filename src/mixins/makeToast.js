@@ -3,7 +3,7 @@ export const makeToast = {
         makeToast(message, title, color) {
             this.$bvToast.toast(message, {
                 title: title,
-                autoHideDelay: 3000,
+                autoHideDelay: 4000,
                 variant: color,
                 appendToast: true
             })

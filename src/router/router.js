@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import RavelrySearchView from "@/views/RavelrySearchView";
 import HomeView from "@/views/HomeView";
+import FavoritesView from "@/views/FavoritesView";
 
 Vue.use(VueRouter)
 
@@ -25,6 +26,12 @@ const routes = [
     path: '/',
     name: 'home',
     component: HomeView,
+    props: true
+  },
+  {
+    path: '/favorites',
+    name: 'favorites',
+    component: FavoritesView,
     props: true
   }
 ]

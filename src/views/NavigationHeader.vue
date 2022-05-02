@@ -8,6 +8,7 @@
       <b-navbar-nav>
         <b-nav-item to="/stash">Yarn Stash</b-nav-item>
         <b-nav-item to="/search">Search</b-nav-item>
+        <b-nav-item v-if="authUser" to="/favorites">Favorites</b-nav-item>
       </b-navbar-nav>
 
       <!-- Right aligned nav items -->
@@ -49,6 +50,6 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
+$myBlue : #BEEFF7
 </style>
