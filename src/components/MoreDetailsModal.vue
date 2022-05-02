@@ -14,9 +14,6 @@
 </template>
 
 <script>
-// import axios from "axios";
-// import Pattern from "@/models/Pattern";
-
 export default {
   name: "MoreDetailsModal",
   props: {item: {type: Object}},
