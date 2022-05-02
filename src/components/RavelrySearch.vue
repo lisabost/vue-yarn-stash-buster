@@ -16,7 +16,6 @@
 <script>
 import axios from 'axios';
 import {makeToast} from "@/mixins/makeToast";
-import Pattern from "@/models/Pattern";
 
 export default {
   name: "RavelrySearch",
@@ -79,9 +78,8 @@ export default {
             if(response.data.patterns.length > 0) {
               for (const i in response.data.patterns) {
                 // put our data in our results array
-                this.searchResults.push(response.data.patterns[i].id);
+                this.searchResults.push(response.data.patterns[i]);
               }
-              this.getDetailedInformation();
             } else {
               this.searchResults = [];
               this.$emit('no-search-results-found');
@@ -92,20 +90,9 @@ export default {
             // Put error message into toast for user
             this.makeToast('AJAX search error', 'AJAX search Failure', 'danger');
           })
-    },
-    async getDetailedInformation() {
-      await Promise.all(
-          this.searchResults.map(async (id) => {
-            const response = await axios.get(`https://api.ravelry.com/patterns/${id}.json`,
-                  {auth: {
-                      username: 'd94df3344302c08b7079c71041d90bbb',
-                      password: '01-eZUS5Q6kykGn0bribecD3ARfRU8stkMuOVi2I'
-                    }})
-            // console.log(response.data.pattern)
-            this.detailedResults.push(Object.assign(new Pattern, response.data.pattern));
+          .finally(() => {
+            this.$emit('search-finished', this.searchResults)
           })
-      )
-      this.$emit('search-finished', this.detailedResults)
     },
     newSearch() {
       //clear form
@@ -113,12 +100,10 @@ export default {
       this.searchObject.searchLength = '';
       //clear results
       this.clearSearchResults();
-      this.$emit('clear', this.searchResults);
+      this.$emit('clear', this.detailedResults);
     },
     clearSearchResults() {
-      while(this.searchResults.length > 0) {
-        this.searchResults.pop();
-      }
+      this.detailedResults.splice(0);
     },
     nextPage() {
       this.page++;

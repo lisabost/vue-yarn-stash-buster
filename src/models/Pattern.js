@@ -57,7 +57,7 @@ function Pattern() {
         return {
             name: this.name,
             pattern_author: this.pattern_author,
-            photos: this.photos,
+            first_photo: this.photos[0],
             permalink: this.permalink,
             notes: this.notes_html,
             price: this.price,

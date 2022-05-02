@@ -1,15 +1,14 @@
 <template>
   <card-body>
     <template>
-      <b-card-img class="pattern-image" :src="pattern.photos[0].medium_url" :alt="pattern.name"></b-card-img>
+      <b-card-img class="pattern-image" :src="pattern.first_photo.medium_url" :alt="pattern.name"></b-card-img>
       <b-card-title>{{pattern.name}}</b-card-title>
       <b-card-sub-title>Designer: {{pattern.pattern_author.name}}</b-card-sub-title>
     </template>
 
     <template v-slot:footer>
-      <b-row class="footer-buttons d-flex flex-row justify-content-between">
-        <b-button class="favorites-button" v-if="authUser" size="sm" variant="outline-primary" @click="addToFavorites(pattern)"><b-icon icon="heart-fill"></b-icon> Save</b-button>
-        <more-details-modal :item="pattern">More Details</more-details-modal>
+      <b-row class="footer-buttons d-flex flex-row justify-content-around">
+        <more-details-modal :authUser="authUser" :item="pattern">More Details</more-details-modal>
       </b-row>
     </template>
   </card-body>
