@@ -63,7 +63,8 @@ function Pattern() {
             price: this.price,
             currency: this.currency,
             yardage: this.yardage,
-            weight: this.yarn_weight
+            weight: this.yarn_weight,
+            searchYarn: this.searchYarn
         }
     }
 }

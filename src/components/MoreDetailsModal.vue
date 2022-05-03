@@ -25,7 +25,7 @@ export default {
   name: "MoreDetailsModal",
   props: {
     item: {type: Object},
-    authUser: {required: false}
+    authUser: {required: false},
   },
   data() {
     return {
@@ -35,6 +35,8 @@ export default {
   mixins: [getMoreDetails, makeToast],
   methods: {
     saveToFavorites() {
+      console.log(this.item.searchYarn);
+      this.pattern.searchYarn = this.item.searchYarn;
       db.collection('crafters').doc(this.authUser.uid).collection('favorites')
           .add(this.pattern.toFirestore())
           .then(docRef => {
@@ -45,7 +47,7 @@ export default {
             console.error('Error saving pattern to favorites', error);
             this.makeToast('Error saving pattern to favorites', 'Pattern Save Failure', 'danger');
           });
-      this.$bvModal.hide(this.modalId);
+      this.$bvModal.hide('modal-' + this.pattern.id);
     },
 
   },
@@ -55,6 +57,7 @@ export default {
     },
   },
   created() {
+    this.searchYarn = this.item.searchYarn;
     this.getMoreDetails(this.item);
   }
 }

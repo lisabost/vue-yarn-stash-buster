@@ -26,12 +26,16 @@ export default {
     return {
       searchObject: {
         searchTerm: '',
+        searchLength: '',
+        searchWeight: '',
       },
       searchResults: [],
       lastSearchTerm: '',
+      lastSearchLength: '',
       searchList: [],
       yarnForSearch: null,
       page: 1,
+      detailedResults: [],
       newPatternWithDetails : {
         pattern: null,
         details: null,
@@ -44,9 +48,11 @@ export default {
       // if the search term is new or the search length is new clear out results for new results
       if(this.searchObject.searchTerm !== this.lastSearchTerm) {
         this.lastSearchTerm = this.searchObject.searchTerm;
+        this.lastSearchLength = this.searchObject.searchLength;
         return true;
       }
       this.lastSearchTerm = this.searchObject.searchTerm;
+      this.lastSearchLength = this.searchObject.searchLength;
     },
     search() {
         let isNewSearch = this.checkForNewSearch();
@@ -54,7 +60,7 @@ export default {
           // clear out the display
           this.clearSearchResults();
           // reset our page count
-          this.page = 1;
+          this.$emit('page-reset');
         }
         this.$emit('searching');
         // build request arguments
@@ -77,7 +83,10 @@ export default {
             if(response.data.patterns.length > 0) {
               for (const i in response.data.patterns) {
                 // put our data in our results array
-                this.searchResults.push(response.data.patterns[i]);
+                let tempItem = response.data.patterns[i];
+                tempItem.searchYarn = this.$route.params.searchWithYarn;
+                this.searchResults.push(tempItem);
+                // this.searchResults.push(response.data.patterns[i]);
               }
             } else {
               this.searchResults = [];
@@ -94,9 +103,9 @@ export default {
           })
     },
     newSearch() {
-      // reset the values
+      // reset values
       this.searchObject.searchTerm = '';
-      this.yarnForSearch = null;
+      this.searchObject.searchLength = '';
       this.page = 1;
       //clear results
       this.clearSearchResults();
@@ -108,6 +117,7 @@ export default {
     nextPage() {
       this.page++;
       this.searchObject.searchTerm = this.lastSearchTerm;
+      this.searchObject.searchLength = this.lastSearchLength;
       this.clearSearchResults();
       this.search();
     },
@@ -116,6 +126,7 @@ export default {
         this.page--;
       }
       this.searchObject.searchTerm = this.lastSearchTerm;
+      this.searchObject.searchLength = this.lastSearchLength;
       this.clearSearchResults();
       this.search();
     }
@@ -129,6 +140,7 @@ export default {
       this.yarnForSearch = this.$route.params.searchWithYarn;
       // put the length into our search object for our search
       this.searchObject.searchLength = this.$route.params.searchWithYarn.length;
+      this.searchObject.searchWeight = this.$route.params.searchWithYarn.weight;
     }
   }
 }
