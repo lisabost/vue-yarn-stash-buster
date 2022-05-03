@@ -29,11 +29,9 @@ export default {
       },
       searchResults: [],
       lastSearchTerm: '',
-      lastSearchLength: '',
       searchList: [],
       yarnForSearch: null,
       page: 1,
-      detailedResults: [],
       newPatternWithDetails : {
         pattern: null,
         details: null,
@@ -45,6 +43,7 @@ export default {
     checkForNewSearch() {
       // if the search term is new or the search length is new clear out results for new results
       if(this.searchObject.searchTerm !== this.lastSearchTerm) {
+        this.lastSearchTerm = this.searchObject.searchTerm;
         return true;
       }
       this.lastSearchTerm = this.searchObject.searchTerm;
@@ -55,7 +54,7 @@ export default {
           // clear out the display
           this.clearSearchResults();
           // reset our page count
-          this.$emit('page-reset');
+          this.page = 1;
         }
         this.$emit('searching');
         // build request arguments
@@ -95,20 +94,20 @@ export default {
           })
     },
     newSearch() {
-      //clear form
+      // reset the values
       this.searchObject.searchTerm = '';
-      this.searchObject.searchLength = '';
+      this.yarnForSearch = null;
+      this.page = 1;
       //clear results
       this.clearSearchResults();
-      this.$emit('clear', this.detailedResults);
+      this.$emit('clear', this.searchResults);
     },
     clearSearchResults() {
-      this.detailedResults.splice(0);
+      this.searchResults.splice(0);
     },
     nextPage() {
       this.page++;
       this.searchObject.searchTerm = this.lastSearchTerm;
-      this.searchObject.searchLength = this.lastSearchLength;
       this.clearSearchResults();
       this.search();
     },
@@ -117,7 +116,6 @@ export default {
         this.page--;
       }
       this.searchObject.searchTerm = this.lastSearchTerm;
-      this.searchObject.searchLength = this.lastSearchLength;
       this.clearSearchResults();
       this.search();
     }
