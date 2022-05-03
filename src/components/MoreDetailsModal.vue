@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-button @click="$bvModal.show(modalId)"><slot></slot></b-button>
-    <b-modal @ok.prevent="saveToFavorites" :ok-title="buttonText" scrollable centered :title="item.name" :id="modalId" class="more-details-modal">
+    <b-modal @ok.prevent="saveToFavorites" :ok-title="buttonText" cancel-variant="danger" cancel-title="Close" scrollable centered :title="item.name" :id="modalId" class="more-details-modal">
       <template v-if="pattern">
         <p v-if="pattern.price > 0">Price: {{pattern.price}} {{pattern.currency}}</p>
         <p>Get the Pattern:
@@ -42,12 +42,12 @@ export default {
           .then(docRef => {
             console.log('Pattern saved', docRef);
             this.makeToast(this.pattern.name +' pattern saved to favorites', 'Pattern Saved', 'success');
+            this.$bvModal.hide('modal-' + this.pattern.id);
           })
           .catch(error => {
             console.error('Error saving pattern to favorites', error);
             this.makeToast('Error saving pattern to favorites', 'Pattern Save Failure', 'danger');
           });
-      this.$bvModal.hide('modal-' + this.pattern.id);
     },
 
   },

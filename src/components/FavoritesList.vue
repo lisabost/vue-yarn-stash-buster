@@ -10,7 +10,7 @@
               </template>
               <template v-slot:pattern-card-footer>
                 <b-row class="footer-buttons d-flex flex-row justify-content-around">
-                  <b-button type="button" class="mr-3" @click="removeFromFavorites(pattern)">Remove from Favorites</b-button>
+                  <b-button type="button" class="mr-3 btn-danger" @click="removeFromFavorites(pattern)">Remove from Favorites</b-button>
                   <favorites-modal :authUser="authUser" :item="pattern">View Pattern Details</favorites-modal>
                 </b-row>
               </template>

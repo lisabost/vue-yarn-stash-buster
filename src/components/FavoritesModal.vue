@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-button @click="$bvModal.show(modalId)"><slot></slot></b-button>
-    <b-modal scrollable centered :title="item.name" :id="modalId" class="basic-modal">
+    <b-modal scrollable centered :title="item.name" :id="modalId" class="basic-modal" cancel-title="Close" cancel-variant="danger">
       <template v-if="item">
         <p v-if="item.price > 0">Price: {{item.price}} {{item.currency}}</p>
         <p>Get the Pattern:
