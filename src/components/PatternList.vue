@@ -1,7 +1,7 @@
 <template>
   <b-row>
-    <b-card-group deck v-for="(pattern, i) in patterns" :key="i" class="col-12 col-md-3 pattern-card-deck">
-      <pattern-card :authUser="authUser" :pattern="pattern" @add-to-favorites="addToFavorites"></pattern-card>
+    <b-card-group deck v-for="pattern in patterns" :key="pattern.id" class="col-12 col-md-3 pattern-card-deck">
+      <pattern-card :patternList="true" :authUser="authUser" :item="pattern" @add-to-favorites="addToFavorites"></pattern-card>
     </b-card-group>
   </b-row>
 </template>

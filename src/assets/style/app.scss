@@ -1,11 +1,14 @@
 // bootstrap variables overrides and adding our own colors etc.
 //$info: #7fff00; //overriding bootstrap's variable
-$tertiary: #440099; //adding our own
+$primary: #317773;
+$secondary:  #E2D1F9; //adding our own
+$tertiary: #440099;
 $theme-colors: ('tertiary': $tertiary);
-
 
 // import bootstrap here
 @import '~bootstrap/scss/bootstrap';
+
+
 
 .theme1{
   $info: #7fff00; //overriding bootstrap's variable

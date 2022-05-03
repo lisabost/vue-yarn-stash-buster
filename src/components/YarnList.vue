@@ -27,8 +27,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
-$myBlue : #BEEFF7;
+$myPink : #E2D1F9;
 .yarn-card {
-  background-color: $myBlue;
+  background-color: $myPink;
 }
 </style>

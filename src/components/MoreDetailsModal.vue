@@ -38,17 +38,14 @@ export default {
       db.collection('crafters').doc(this.authUser.uid).collection('favorites')
           .add(this.pattern.toFirestore())
           .then(docRef => {
-            // report success
             console.log('Pattern saved', docRef);
             this.makeToast(this.pattern.name +' pattern saved to favorites', 'Pattern Saved', 'success');
-            // close modal
-            this.$bvModal.hide(this.modalId);
           })
           .catch(error => {
-            // report failure
             console.error('Error saving pattern to favorites', error);
             this.makeToast('Error saving pattern to favorites', 'Pattern Save Failure', 'danger');
           });
+      this.$bvModal.hide(this.modalId);
     },
 
   },
