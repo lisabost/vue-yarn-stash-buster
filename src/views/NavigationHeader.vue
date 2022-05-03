@@ -1,6 +1,6 @@
 <template>
   <b-navbar toggleable="lg" type="dark" variant="primary">
-    <b-navbar-brand href="#" to="/">STASH BUSTER!</b-navbar-brand>
+    <b-navbar-brand class="site-brand" href="#" to="/"><h2>STASH BUSTER!</h2></b-navbar-brand>
 
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
@@ -51,5 +51,11 @@ export default {
 </script>
 
 <style scoped lang="scss">
-$myBlue : #BEEFF7
+$myBlue : #BEEFF7;
+.site-brand {
+  font-family: 'EB Garamond', serif;
+}
+.navbar-dark .navbar-nav .nav-link {
+  font-family: 'Quicksand', sans-serif;
+}
 </style>

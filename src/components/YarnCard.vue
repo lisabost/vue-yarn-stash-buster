@@ -83,5 +83,6 @@ export default {
 .yarn-button-row {
   margin-right: 0;
   margin-left: 0;
+  font-family: 'Quicksand', sans-serif;
 }
 </style>
