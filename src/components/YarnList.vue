@@ -39,8 +39,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
-$myPink : #e1daf2;
+$myPurple : #AA96DA;
 .yarn-card {
-  background-color: $myPink;
+  border-color: $myPurple;
+  border-width: 2px;
 }
 </style>
