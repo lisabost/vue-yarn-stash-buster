@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import RavelrySearchView from "@/views/RavelrySearchView";
 import HomeView from "@/views/HomeView";
 import FavoritesView from "@/views/FavoritesView";
+import BadgesView from "@/views/BadgesView";
 
 Vue.use(VueRouter)
 
@@ -32,6 +33,12 @@ const routes = [
     path: '/favorites',
     name: 'favorites',
     component: FavoritesView,
+    props: true
+  },
+  {
+    path: '/badges',
+    name: 'badges',
+    component: BadgesView,
     props: true
   }
 ]

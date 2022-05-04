@@ -64,17 +64,18 @@ export default {
         yarn: this.yarn ?? new Yarn(),
         image: null,
       },
-      message: ''
+      message: '',
+
     }
   },
   mixins: [makeToast],
   methods: {
-
     createOrEditYarn() {
       if(this.currentlyEditing) {
         this.editYarn();
       }
       else {
+
         this.saveNewYarn();
       }
     },
