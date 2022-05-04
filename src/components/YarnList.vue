@@ -39,7 +39,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-$myPink : #E2D1F9;
+$myPink : #e1daf2;
 .yarn-card {
   background-color: $myPink;
 }

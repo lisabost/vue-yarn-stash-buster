@@ -1,14 +1,14 @@
 <template>
   <div>
     <b-form @submit.prevent="search" id="ravelry-search-form" class="mt-3">
-      <b-form-group id="search-term-input" label="Search Ravelry:" label-for="search-term" description="Example search terms: hat, socks, blanket, etc.">
+      <b-form-group id="search-term-input" class="search-label" label="Search Ravelry:" for="search-term" description="Example search terms: hat, socks, blanket, etc.">
         <b-form-input id="search-term" v-model="searchObject.searchTerm" type="text" placeholder="Enter search term"></b-form-input>
       </b-form-group>
       <p v-if="yarnForSearch">You are searching for patterns with: {{yarnForSearch.name}}, {{yarnForSearch.color}}</p>
-      <b-button type="button" @click="previousPage" class="mt-3">Previous Page</b-button>
-      <b-button type="button" @click="nextPage" class="ml-2 mt-3">Next Page</b-button>
-      <b-button type="button" @click="newSearch" class="ml-2 mt-3">New Search</b-button>
-      <b-button type="submit" variant="primary" class="ml-2 mt-3 float-right">Search for Patterns</b-button>
+      <b-button type="button" @click="previousPage" class="mt-3 buttons btn-outline-tertiary search-button">Previous Page</b-button>
+      <b-button type="button" @click="nextPage" class="ml-2 mt-3 buttons btn-outline-tertiary search-button">Next Page</b-button>
+      <b-button type="button" @click="newSearch" class="ml-2 mt-3 btn-secondary btn-outline-tertiary search-button buttons">New Search</b-button>
+      <b-button type="submit" variant="primary" class="ml-2 mt-3 float-right buttons">Search for Patterns</b-button>
     </b-form>
   </div>
 </template>
@@ -147,5 +147,11 @@ export default {
 </script>
 
 <style scoped>
-
+.search-button {
+  color: black;
+}
+.buttons {
+  font-family: 'EB Garamond', serif;
+  border: none;
+}
 </style>

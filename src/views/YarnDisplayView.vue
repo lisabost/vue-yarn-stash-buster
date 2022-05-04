@@ -1,6 +1,6 @@
 <template>
   <div class="yarn-stash-page">
-    <h2 class="mt-2">Yarn Stash</h2>
+    <h2 class="mt-2 stash-title">Yarn Stash</h2>
     <div v-if="loggedIn">
       <yarn-modal :authUser="authUser" :ok-button-text="'Add Yarn'" :modalId="modalId">Add Yarn to Your Stash</yarn-modal>
       <user-yarn-list :authUser="authUser"></user-yarn-list>
@@ -38,5 +38,7 @@ export default {
 </script>
 
 <style scoped>
-
+.stash-title {
+  font-family: "EB Garamond", serif;
+}
 </style>

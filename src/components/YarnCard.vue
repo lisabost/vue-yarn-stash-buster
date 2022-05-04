@@ -1,7 +1,7 @@
 <template>
   <card-body>
     <template v-slot:header>
-      <b-card-title>{{yarn.name}}</b-card-title>
+      <b-card-title class="yarn-card-title">{{yarn.name}}</b-card-title>
     </template>
     <template>
       <b-card-text class="mt-2">
@@ -84,5 +84,8 @@ export default {
   margin-right: 0;
   margin-left: 0;
   font-family: 'Quicksand', sans-serif;
+}
+.yarn-card-title {
+  font-family: "EB Garamond", serif;
 }
 </style>

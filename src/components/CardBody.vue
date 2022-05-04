@@ -12,7 +12,8 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+$primary: #AA96DA;
 .sticky-footer {
   position: absolute;
   bottom: 0;
@@ -25,6 +26,7 @@ export default {
 }
 .card-header {
   width: 100%;
+  background-color: $primary;
 }
 .reusable-card .card-body {
   padding: 0;

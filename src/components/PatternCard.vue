@@ -23,7 +23,6 @@ export default {
   props: {
     item: Object,
     authUser: {required: false},
-    patternList: {type: Boolean},
   },
   methods: {
 

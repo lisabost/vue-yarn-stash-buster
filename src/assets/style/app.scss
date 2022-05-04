@@ -1,8 +1,12 @@
 // bootstrap variables overrides and adding our own colors etc.
 //$info: #7fff00; //overriding bootstrap's variable
-$primary: #317773;
-$secondary:  #E2D1F9; //adding our own
-$tertiary: #440099;
+$primary: #AA96DA;
+$secondary:  #C5FAD5; //adding our own
+$tertiary: #FFFFD2;
+$success: #7fff00;
+$info: #E2D1F9;
+$warning: #ffff00;
+$danger: #ffcc99;
 $theme-colors: ('tertiary': $tertiary);
 
 // import bootstrap here
@@ -11,6 +15,8 @@ $theme-colors: ('tertiary': $tertiary);
 
 
 .theme1{
+  $primary: #AA96DA;
+  $secondary: #C5FAD5;
   $info: #7fff00; //overriding bootstrap's variable
   $tertiary: #440099; //adding our own
   $theme-colors: ('tertiary': $tertiary);
@@ -35,3 +41,6 @@ $theme-colors: ('tertiary': $tertiary);
 
 
 // override styles down here
+#app {
+  font-family: 'Quicksand', sans-serif;
+}
