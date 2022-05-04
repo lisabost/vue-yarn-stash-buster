@@ -5,7 +5,7 @@
       <img alt="Yarn ball" src="../assets/free-ball-of-wool.png" class="mx-auto d-block">
     </div>
 
-    <b-row class="d-flex flex-row justify-content-around button-row">
+    <b-row class="d-flex flex-row justify-content-around">
       <b-button type="button" v-if="authUser" class="mt-3 btn-primary" @click="viewStash">View Your Stash</b-button>
       <b-button type="button" v-else class="mt-3 ml-3 btn-primary" @click="login">Sign in to Manage Your Stash</b-button>
       <b-button type="button" class="ml-3 mt-3 btn-primary" @click="redirectToSearch">Search for Patterns</b-button>
