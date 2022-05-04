@@ -28,7 +28,5 @@ export default {
 </script>
 
 <style scoped>
-.pattern-list-cards .card-title{
-  font-size: 1em;
-}
+
 </style>

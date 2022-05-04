@@ -1,7 +1,7 @@
 <template>
   <card-body>
     <template v-slot:header>
-      <b-card-title>{{item.name}}</b-card-title>
+      <b-card-title class="pattern-title">{{item.name}}</b-card-title>
     </template>
     <template>
       <b-card-img class="pattern-image" :src="item.first_photo.medium_url" :alt="item.name"></b-card-img>
@@ -37,5 +37,8 @@ export default {
 .pattern-image {
   height: 200px;
   object-fit: cover;
+}
+.pattern-title {
+  font-family: "EB Garamond", serif;
 }
 </style>
