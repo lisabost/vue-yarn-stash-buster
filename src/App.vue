@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <navigation-header :auth-user="authUser"></navigation-header>
-    <b-container>
+    <b-container fluid>
       <router-view :auth-user="authUser"></router-view>
     </b-container>
   </div>

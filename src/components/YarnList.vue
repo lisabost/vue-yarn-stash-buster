@@ -42,5 +42,6 @@ $myPurple : #AA96DA;
 .yarn-card {
   border-color: $myPurple;
   border-width: 2px;
+  height: 450px;
 }
 </style>

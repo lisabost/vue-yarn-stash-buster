@@ -1,6 +1,6 @@
 <template>
   <div class="badges-page">
-    <h2 class="badges-title">Your Achievements</h2>
+    <h2 class="badges-title my-2">Your Achievements</h2>
     <div v-if="loggedIn">
       <user-badges-list :authUser="authUser"></user-badges-list>
     </div>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-button @click="$bvModal.show(modalId)"><slot></slot></b-button>
+    <b-button @click="$bvModal.show(modalId)" class="btn-outline-tertiary details-button my-3"><slot></slot></b-button>
     <b-modal @ok.prevent="saveToFavorites" :ok-title="buttonText" cancel-variant="danger" cancel-title="Close" scrollable centered :title="item.name" :id="modalId" class="more-details-modal">
       <template v-if="pattern">
         <p v-if="pattern.price > 0">Price: {{pattern.price}} {{pattern.currency}}</p>
@@ -72,5 +72,9 @@ export default {
 <style scoped>
 .more-details-modal {
   width: 600px;
+}
+.details-button {
+  color: black;
+  border: none;
 }
 </style>

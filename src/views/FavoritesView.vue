@@ -1,6 +1,6 @@
 <template>
   <div class="yarn-display-view">
-    <h2 class="mt-2 favorites-title">Favorite Patterns</h2>
+    <h2 class="my-2 favorites-title">Favorite Patterns</h2>
     <template v-if="loggedIn">
       <user-favorites-list :authUser="authUser"></user-favorites-list>
     </template>

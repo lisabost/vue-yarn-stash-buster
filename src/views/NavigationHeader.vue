@@ -1,5 +1,5 @@
 <template>
-  <b-navbar toggleable="lg" type="dark" variant="primary">
+  <b-navbar toggleable="lg" variant="primary">
     <b-navbar-brand class="site-brand" href="#" to="/"><h2>STASH BUSTER!</h2></b-navbar-brand>
 
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>

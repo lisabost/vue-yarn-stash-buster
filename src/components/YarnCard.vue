@@ -7,7 +7,7 @@
       <b-card-text class="mt-2">
         <b-row>
           <b-col md="6" class="d-flex flex-column">
-            <b-img :src="yarn.image" :alt="yarn.name" class="m-3"></b-img>
+            <b-img :src="yarn.image" :alt="yarn.name" class="m-3 yarn-image"></b-img>
           </b-col>
           <b-col md="6" class="d-flex flex-column mt-3">
             <p v-if="yarn.color">Color: {{yarn.color}}</p>
@@ -23,7 +23,7 @@
         <b-button @click="findAPattern(yarn)" class="my-3">Find a Pattern!</b-button>
         <yarn-modal :auth-user="authUser" :ok-button-text="'Edit Yarn'" :currentlyEditing="editing"
                     :yarn="yarn" :modalId="getModalId" :yarnId="yarn.id" class="ml-3">Edit Yarn</yarn-modal>
-        <b-button class="btn-danger my-3 delete-button float-right ml-3" @click="removeYarn">Delete Yarn</b-button>
+        <b-button class="btn-danger my-3 delete-button float-right ml-3" @click="removeYarn">Remove Yarn</b-button>
       </b-row>
     </template>
   </card-body>
@@ -96,5 +96,9 @@ export default {
 }
 .yarn-card-title {
   font-family: "EB Garamond", serif;
+}
+.yarn-image {
+  max-height: 250px;
+  object-fit: cover;
 }
 </style>
