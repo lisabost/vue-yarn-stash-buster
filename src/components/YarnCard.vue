@@ -21,7 +21,7 @@
     <template v-slot:footer>
       <b-row class="yarn-button-row d-flex flex-row justify-content-around">
         <b-button @click="findAPattern(yarn)" class="my-3">Find a Pattern!</b-button>
-        <yarn-modal :auth-user="authUser" :ok-button-text="'Edit Yarn'" :currently-editing="true"
+        <yarn-modal :auth-user="authUser" :ok-button-text="'Edit Yarn'" :currentlyEditing="editing"
                     :yarn="yarn" :modalId="getModalId" :yarnId="yarn.id" class="ml-3">Edit Yarn</yarn-modal>
         <b-button class="btn-danger my-3 delete-button float-right ml-3" @click="removeYarn">Delete Yarn</b-button>
       </b-row>
@@ -34,10 +34,12 @@ import CardBody from "@/components/CardBody";
 import {db, storage} from "@/firebase";
 import YarnModal from "@/components/YarnModal";
 import {makeToast} from "@/mixins/makeToast";
+import firebase from "firebase";
 export default {
   name: "YarnCard",
   data() {
     return {
+      editing: true
     }
   },
   components: {YarnModal, CardBody},
@@ -65,11 +67,18 @@ export default {
           console.error('Error deleting yarn', error);
           this.makeToast('Error deleting yarn', 'Error!', 'danger');
         })
+      .finally(() => {
+        this.makeToast('Successfully deleted yarn', 'Deleted Yarn', 'success' );
+        this.lowerYarnCount();
+      })
     },
     findAPattern(yarn) {
-      console.log('The yarn I clicked on is: ' + yarn)
       this.$router.push({name: 'search', params: {searchWithYarn: yarn}})
     },
+    lowerYarnCount() {
+      db.collection('crafters').doc(this.authUser.uid)
+          .update({yarnUsed: firebase.firestore.FieldValue.increment(1)});
+    }
   },
   computed: {
     getModalId() {

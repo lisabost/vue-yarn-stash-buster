@@ -20,6 +20,7 @@
 import {getMoreDetails} from "@/mixins/getMoreDetails";
 import {db} from "@/firebase";
 import {makeToast} from "@/mixins/makeToast";
+import firebase from "firebase";
 
 export default {
   name: "MoreDetailsModal",
@@ -42,6 +43,8 @@ export default {
           .then(docRef => {
             console.log('Pattern saved', docRef);
             this.makeToast(this.pattern.name +' pattern saved to favorites', 'Pattern Saved', 'success');
+            // update count of favorite patterns
+            this.raiseFavoritePatternCount();
             this.$bvModal.hide('modal-' + this.pattern.id);
           })
           .catch(error => {
@@ -49,7 +52,10 @@ export default {
             this.makeToast('Error saving pattern to favorites', 'Pattern Save Failure', 'danger');
           });
     },
-
+    raiseFavoritePatternCount() {
+      db.collection('crafters').doc(this.authUser.uid)
+          .update({favoritePatternCount: firebase.firestore.FieldValue.increment(1)});
+    },
   },
   computed: {
     modalId() {

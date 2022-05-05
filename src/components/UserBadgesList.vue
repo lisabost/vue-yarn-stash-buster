@@ -1,6 +1,6 @@
 <template>
-  <div v-if="yarnCollection.length > 0 && patternCollection.length > 0">
-    <badges-list :yarnCollection="yarnCollection" :patternCollection="patternCollection" :authUser="authUser"></badges-list>
+  <div v-if="yarnCount > 0 && favoritePatternCount > 0">
+    <badges-list :yarnCount="yarnCount" :favoritePatternCount="favoritePatternCount" :authUser="authUser"></badges-list>
   </div>
   <div v-else>
     Loading...
@@ -20,14 +20,19 @@ export default {
     return {
       yarnCollection: [],
       patternCollection: [],
+      yarnCount: 0,
+      favoritePatternCount: 0,
+      yarnUsedCount: 0,
     }
   },
   firestore() {
-    return {
-      yarnCollection: db.collection('crafters').doc(this.authUser.uid).collection('yarn'),
-      patternCollection: db.collection('crafters').doc(this.authUser.uid).collection('favorites')
-    }
-
+    db.collection('crafters').doc(this.authUser.uid).get()
+        .then((doc) => {
+          let data = doc.data();
+          this.yarnCount = data.yarnCount;
+          this.favoritePatternCount = data.favoritePatternCount;
+          this.yarnUsedCount = data.yarnUsed;
+        });
   }
 }
 </script>

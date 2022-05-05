@@ -6,6 +6,7 @@
 import FavoritesList from "@/components/FavoritesList";
 import {db} from "@/firebase";
 import {makeToast} from "@/mixins/makeToast";
+import firebase from "firebase";
 
 export default {
   name: "UserFavoritesList",
@@ -32,9 +33,13 @@ export default {
           this.makeToast('Error removing pattern from favorites', 'Favorites Deletion Failure', 'danger');
         })
         .finally(() => {
-          console.log('Succeeded in removing pattern from favorites');
+          this.lowerFavoritePatternCount();
           this.makeToast('Succeeded in removing pattern from favorites', 'Pattern Deleted', 'success');
         })
+    },
+    lowerFavoritePatternCount() {
+      db.collection('crafters').doc(this.authUser.uid)
+          .update({favoritePatternCount: firebase.firestore.FieldValue.increment(-1)});
     }
   },
 }

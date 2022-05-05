@@ -23,7 +23,7 @@
             <b-form-input id="fiber" v-model="newYarn.yarn.fiber"></b-form-input>
           </b-form-group>
           <b-form-group label="Image:" label-for="image">
-            <b-form-file id="image" v-model="newYarn.yarn.image" ref="newImage"></b-form-file>
+            <b-form-file id="image" v-model="newYarn.image" ref="newImage"></b-form-file>
           </b-form-group>
         </b-form>
       </template>
@@ -35,6 +35,7 @@
 import {db, storage} from "@/firebase";
 import Yarn from "@/models/Yarn";
 import {makeToast} from "@/mixins/makeToast";
+import firebase from "firebase";
 
 export default {
   name: "YarnModal",
@@ -48,7 +49,6 @@ export default {
   },
   data() {
     return {
-      // modalId: 'add-yarn-modal',
       options: [
         {value: null, text: 'Select a yarn weight'},
         {value: 'lace', text: 'Lace'},
@@ -64,8 +64,7 @@ export default {
         yarn: this.yarn ?? new Yarn(),
         image: null,
       },
-      message: '',
-
+      yarnCount: 0
     }
   },
   mixins: [makeToast],
@@ -75,8 +74,9 @@ export default {
         this.editYarn();
       }
       else {
-
         this.saveNewYarn();
+        // add yarn count
+        this.raiseYarnCount();
       }
     },
     saveNewYarn() {
@@ -89,7 +89,6 @@ export default {
 
           // add the image to storage
           this.addImage(docRef.id);
-
           // clear the form
           this.newYarn.yarn = new Yarn();
           // close modal
@@ -101,44 +100,34 @@ export default {
         });
     },
     addImage(docId){
+      console.log('DocId: ' + docId);
+      console.log('Image: ' +this.newYarn.image);
       // docId and image file are required
       if(!docId || !this.newYarn.image){
         return false;
       }
-
       let theYarn = this.newYarn;
       let allowedTypes = ['jpg', 'png', 'gif'];
       let extension = theYarn.image.name.toLowerCase().split('.').pop()
-
       // validate extension
       if(allowedTypes.indexOf(extension) < 0){
-        // invalid extension
-
-        // let the user know...
+        // invalid extension - let the user know
         this.makeToast('Invalid file type.', 'Error', 'danger');
-
         return false;
       }
-
       // validate size (less than 200KB
       if(theYarn.image.size > (200 * 1024)){
-        // file too large
-
-        // let the user know...
+        // file too large - let the user know
         this.makeToast('File too large. 200KB max', 'Error!', 'danger');
-
         return false;
       }
-
       // add image to firebase
       storage.child('yarn').child(docId)
           .put(this.newYarn.image)
           .then(snapshot => {
             console.log('Image added ', snapshot);
-
             // clear the form
             this.newYarn.image = null;
-
             // get the image url to update the yarn document
             return snapshot.ref.getDownloadURL();
           })
@@ -146,18 +135,17 @@ export default {
           .then(docRef => console.log('Yarn Updated', docRef))
           .catch(error => {
             console.error('Error updating yarn' , error, )
-
             // let user know error
             this.makeToast('Error updating yarn', 'Error', 'danger')
           })
     },
     editYarn() {
       // update the document
+      let tempYarn = new Yarn(this.newYarn.yarn.name, this.newYarn.yarn.length, this.newYarn.yarn.color, this.newYarn.yarn.weight, this.newYarn.yarn.fiber);
       db.collection('crafters').doc(this.authUser.uid).collection(Yarn.collectionName).doc(this.yarnId)
-          .update(this.newYarn.yarn.toFirestore())
+          .update(tempYarn.toFirestore())
           .then(docRef => {
             console.log('Yarn updated', docRef)
-
             //update the image - delete and then add new one
             storage.child('/yarn').child(this.yarnId)
                 .delete()
@@ -169,10 +157,8 @@ export default {
               .put(this.newYarn.image)
               .then(snapshot => {
                 console.log('Image updated', snapshot)
-
                 //clear form
                 this.newYarn.image = null;
-
                 // get the image url to update the yarn document
                 return snapshot.ref.getDownloadURL();
               })
@@ -180,18 +166,20 @@ export default {
               .then(docRef => console.log('Yarn Updated', docRef))
               .catch(error => {
                 console.error('Error updating image' , error)
-
                 // let user know error
                 this.makeToast('Error updating yarn', 'Error', 'danger')
               })
-
             this.makeToast(' Yarn Updated: Imaged Changed/Added', 'Image Added!', 'success')
+            // close modal
+            this.$bvModal.hide(this.modalId);
           })
-
-      //report success
-      this.makeToast('Yarn edited successfully!', 'Success!', 'success')
     },
+    raiseYarnCount() {
+      db.collection('crafters').doc(this.authUser.uid)
+          .update({yarnCount: firebase.firestore.FieldValue.increment(1)});
+    }
   },
+
   computed: {
   }
 }

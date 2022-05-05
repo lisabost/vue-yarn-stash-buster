@@ -13,8 +13,9 @@ export default {
   name: "BadgesList",
   components: {BadgeCard},
   props: {
-    yarnCollection: {type: Array},
-    patternCollection: {type: Array},
+    yarnCount: {type: Number},
+    favoritePatternCount: {type: Number},
+    yarnUsedCount: {type: Number},
     authUser: {required: true},
   },
   data() {
@@ -23,7 +24,7 @@ export default {
   },
   mixins: [awardBadges],
   created() {
-    this.awardBadges(this.yarnCollection, this.patternCollection);
+    this.awardBadges(this.yarnCount, this.favoritePatternCount, this.yarnUsedCount);
   }
 }
 </script>

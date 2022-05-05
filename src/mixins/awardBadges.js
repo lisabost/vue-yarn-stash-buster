@@ -2,55 +2,40 @@ import badges from "@/models/badges";
 
 export const awardBadges = {
     props: {
-        yarnCollection: {type: Array},
-        patternCollection: {type: Array},
+        yarnCount: {type: Number},
+        favoritePatternCount: {type: Number},
+        yarnUsedCount: {type: Number},
     },
     data() {
         return {
-            badgeList: []
+            badgeList: [],
         }
     },
     methods: {
-        awardBadges(yarnCollection, patternCollection) {
-            let yarnLength = yarnCollection.length;
-            let patternLength = patternCollection.length;
-            if(yarnLength >= 1) {
-                this.badgeList.push(badges.oneYarn);
-            }
-            if(yarnLength >= 5) {
-                this.badgeList.push(badges.fiveYarn);
-            }
-            if(yarnLength >= 10) {
-                this.badgeList.push(badges.tenYarn);
-            }
-            if(yarnLength >= 15) {
-                this.badgeList.push(badges.fifteenYarn);
-            }
-            if(yarnLength >= 20) {
-                this.badgeList.push(badges.twentyYarn);
-            }
-            if(yarnLength >= 30) {
-                this.badgeList.push(badges.thirtyYarn);
-            }
+        awardBadges(yarnCount, favoritePatternCount, yarnUsedCount) {
+            // yarn stash badges
+            if(yarnCount >= 1) { this.badgeList.push(badges.oneYarn); }
+            if(yarnCount >= 5) { this.badgeList.push(badges.fiveYarn); }
+            if(yarnCount >= 10) { this.badgeList.push(badges.tenYarn); }
+            if(yarnCount >= 15) { this.badgeList.push(badges.fifteenYarn); }
+            if(yarnCount >= 20) { this.badgeList.push(badges.twentyYarn); }
+            if(yarnCount >= 30){ this.badgeList.push(badges.thirtyYarn); }
 
-            if(patternLength >= 1) {
-                this.badgeList.push(badges.onePattern);
-            }
-            if(patternLength >= 5) {
-                this.badgeList.push(badges.fivePattern);
-            }
-            if(patternLength >= 10) {
-                this.badgeList.push(badges.tenPattern);
-            }
-            if(patternLength >= 15) {
-                this.badgeList.push(badges.fifteenPattern);
-            }
-            if(patternLength >= 20) {
-                this.badgeList.push(badges.twentyPattern);
-            }
-            if(patternLength >= 30) {
-                this.badgeList.push(badges.thirtyPattern);
-            }
+            // favorite pattern badges
+            if(favoritePatternCount >= 1) { this.badgeList.push(badges.onePattern); }
+            if(favoritePatternCount >= 5) { this.badgeList.push(badges.fivePattern); }
+            if(favoritePatternCount >= 10) { this.badgeList.push(badges.tenPattern); }
+            if(favoritePatternCount >= 15) { this.badgeList.push(badges.fifteenPattern); }
+            if(favoritePatternCount >= 20) { this.badgeList.push(badges.twentyPattern); }
+            if(favoritePatternCount >= 30) { this.badgeList.push(badges.thirtyPattern); }
+
+            // yarn used badges
+            if(yarnUsedCount >= 1) { this.badgeList.push(badges.oneUsed); }
+            if(yarnUsedCount >= 5) { this.badgeList.push(badges.fiveUsed); }
+            if(yarnUsedCount >= 10) { this.badgeList.push(badges.tenUsed); }
+            if(yarnUsedCount >= 15) { this.badgeList.push(badges.fifteenUsed); }
+            if(yarnUsedCount >= 20) { this.badgeList.push(badges.twentyUsed); }
+            if(yarnUsedCount >= 30) { this.badgeList.push(badges.thirtyUsed); }
         }
     },
 }
