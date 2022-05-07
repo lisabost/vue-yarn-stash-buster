@@ -44,3 +44,7 @@ $theme-colors: ('tertiary': $tertiary);
 #app {
   font-family: 'Quicksand', sans-serif;
 }
+
+div.stash > div.create-yarn-modal > button {
+  font-size: 1.25em;
+}

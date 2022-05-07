@@ -1,7 +1,8 @@
 <template>
   <card-body>
     <template v-slot:header>
-      <b-card-title class="pattern-title">{{item.name}}</b-card-title>
+      <slot name="pattern-card-header"></slot>
+<!--      <b-card-title class="pattern-title">{{item.name}}</b-card-title>-->
     </template>
     <template>
       <b-card-img class="pattern-image" :src="item.first_photo.medium_url" :alt="item.name"></b-card-img>

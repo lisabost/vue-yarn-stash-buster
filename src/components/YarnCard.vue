@@ -20,10 +20,10 @@
     </template>
     <template v-slot:footer>
       <b-row class="yarn-button-row d-flex flex-row justify-content-around">
-        <b-button @click="findAPattern(yarn)" class="my-3">Find a Pattern!</b-button>
+        <b-button variant="danger" class="my-2 btn-outline-tertiary yarn-card-button float-right ml-3" @click="removeYarn">Remove Yarn</b-button>
         <yarn-modal :auth-user="authUser" :ok-button-text="'Edit Yarn'" :currentlyEditing="editing"
                     :yarn="yarn" :modalId="getModalId" :yarnId="yarn.id" class="ml-3">Edit Yarn</yarn-modal>
-        <b-button class="btn-danger my-3 delete-button float-right ml-3" @click="removeYarn">Remove Yarn</b-button>
+        <b-button @click="findAPattern(yarn)" class="my-2 yarn-card-button btn-outline-tertiary" variant="secondary">Find a Pattern!</b-button>
       </b-row>
     </template>
   </card-body>
@@ -88,11 +88,14 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+$primary: #AA96DA;
+
 .yarn-button-row {
   margin-right: 0;
   margin-left: 0;
-  font-family: 'Quicksand', sans-serif;
+  font-family: "EB Garamond", serif;
+  font-size: 1em;
 }
 .yarn-card-title {
   font-family: "EB Garamond", serif;
@@ -100,5 +103,9 @@ export default {
 .yarn-image {
   max-height: 250px;
   object-fit: cover;
+}
+.yarn-card-button {
+  border: none;
+  color: black;
 }
 </style>

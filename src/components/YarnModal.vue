@@ -1,7 +1,8 @@
 <template>
   <div class="create-yarn-modal">
-    <b-button @click="$bvModal.show(modalId)" class="btn-primary my-3"><slot></slot></b-button>
-    <b-modal scrollable centered @ok.prevent="createOrEditYarn" :ok-title="okButtonText" title="Add Yarn to Stash" :id="modalId">
+    <b-button @click="$bvModal.show(modalId)" class="my-2 btn-outline-tertiary add-yarn-button" variant="secondary"><slot></slot></b-button>
+    <b-modal scrollable centered header-bg-variant="primary" footer-bg-variant="primary" cancel-variant="danger" ok-variant="secondary" footer-class="yarn-modal-footer"
+             @ok.prevent="createOrEditYarn" :ok-title="okButtonText" title="Add Yarn to Stash" :id="modalId">
       <template>
         <b-form validated>
           <b-form-group label="Yarn Name:" label-for="name">
@@ -177,7 +178,7 @@ export default {
     raiseYarnCount() {
       db.collection('crafters').doc(this.authUser.uid)
           .update({yarnCount: firebase.firestore.FieldValue.increment(1)});
-    }
+    },
   },
 
   computed: {
@@ -186,5 +187,10 @@ export default {
 </script>
 
 <style scoped>
+.add-yarn-button {
+  border: none;
+  color: black;
+  font-family: "EB Garamond", serif;
+}
 
 </style>

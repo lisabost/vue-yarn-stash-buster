@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-button @click="$bvModal.show(modalId)"><slot></slot></b-button>
+    <b-button variant="secondary" class="my-2 btn-outline-tertiary favorites-modal-button" @click="$bvModal.show(modalId)"><slot></slot></b-button>
     <b-modal scrollable centered :title="item.name" :id="modalId" class="basic-modal" cancel-title="Close" cancel-variant="danger">
       <template v-if="item">
         <p v-if="item.price > 0">Price: {{item.price}} {{item.currency}}</p>
@@ -36,5 +36,8 @@ export default {
 </script>
 
 <style scoped>
-
+.favorites-modal-button {
+  color: black;
+  font-family: "EB Garamond", serif;
+}
 </style>
