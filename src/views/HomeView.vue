@@ -4,10 +4,10 @@
     <div class="image-holder">
       <img alt="Yarn ball" src="../assets/free-ball-of-wool.png" class="mx-auto d-block">
     </div>
-    <b-row class="d-flex flex-row justify-content-around">
-      <b-button type="button" v-if="authUser" class="mt-3" variant="primary" size="lg" @click="viewStash">View Your Stash</b-button>
-      <b-button type="button" v-else class="mt-3 ml-3" variant="primary" size="lg" @click="login">Sign in to Manage Your Stash</b-button>
-      <b-button type="button" class="ml-3 mt-3" variant="primary" size="lg" @click="redirectToSearch">Search for Patterns</b-button>
+    <b-row class="d-flex flex-row justify-content-around home-button-row">
+      <b-button type="button" v-if="authUser" class="mt-3 btn-outline-tertiary home-buttons" variant="secondary" size="lg" @click="viewStash">View Your Stash</b-button>
+      <b-button type="button" v-else class="mt-3 ml-3 btn-outline-tertiary home-buttons" variant="secondary" size="lg" @click="login">Sign in to Manage Your Stash</b-button>
+      <b-button type="button" class="ml-3 mt-3 btn-outline-tertiary home-buttons" variant="secondary" size="lg" @click="redirectToSearch">Search for Patterns</b-button>
     </b-row>
   </div>
 </template>
@@ -48,5 +48,9 @@ export default {
 <style scoped>
 .welcome-title {
   font-family: "EB Garamond", serif;
+}
+.home-buttons{
+  border: none;
+  color: black;
 }
 </style>

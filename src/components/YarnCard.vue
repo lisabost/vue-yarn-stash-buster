@@ -10,10 +10,10 @@
             <b-img :src="yarn.image" :alt="yarn.name" class="m-3 yarn-image"></b-img>
           </b-col>
           <b-col md="6" class="d-flex flex-column mt-3">
-            <p v-if="yarn.color">Color: {{yarn.color}}</p>
-            <p>Length: {{yarn.length}} yards</p>
-            <p>Weight: {{yarn.weight}}</p>
-            <p v-if="yarn.fiber">Fiber type: {{yarn.fiber}}</p>
+            <p class="capitalized-text" v-if="yarn.color">Color: {{yarn.color}}</p>
+            <p class="capitalized-text">Length: {{yarn.length}} yards</p>
+            <p class="capitalized-text">Weight: {{yarn.weight}}</p>
+            <p class="capitalized-text" v-if="yarn.fiber">Fiber type: {{yarn.fiber}}</p>
           </b-col>
         </b-row>
       </b-card-text>
@@ -57,7 +57,7 @@ export default {
             .delete()
             .catch(error => {
               console.error('Error deleting yarn', error)
-              this.makeToast('Error deleting yarn', 'Error!', 'danger');
+              this.makeToast('There was a problem deleting the yarn from your stash. Please try again.', 'Error Deleting Yarn!', 'danger');
             });
       }
       // remove yarn from database
@@ -66,10 +66,10 @@ export default {
         .delete()
         .catch(error => {
           console.error('Error deleting yarn', error);
-          this.makeToast('Error deleting yarn', 'Error!', 'danger');
+          this.makeToast('There was a problem deleting the yarn from your stash. Please try again.', 'Error Deleting Yarn!', 'danger');
         })
       .finally(() => {
-        this.makeToast('Successfully deleted yarn', 'Deleted Yarn', 'success' );
+        this.makeToast(this.yarn.name + ', ' + this.yarn.color + ' removed from your stash', 'Yarn Deleted', 'success' );
         this.lowerYarnCount();
       })
     },

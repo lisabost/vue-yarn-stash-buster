@@ -1,7 +1,6 @@
 <template>
-  <b-navbar toggleable="lg" variant="primary">
+  <b-navbar toggleable="lg" variant="primary" id="nav-bar" class="fixed-top mb-5">
     <b-navbar-brand class="site-brand" href="#" to="/"><h2>STASH BUSTER!</h2></b-navbar-brand>
-
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
     <b-collapse id="nav-collapse" is-nav>
@@ -58,5 +57,12 @@ $myBlue : #BEEFF7;
 }
 .navbar-dark .navbar-nav .nav-link {
   font-family: 'Quicksand', sans-serif;
+}
+#nav-bar {
+  height: 60px;
+  border-bottom: 5px black;
+  box-shadow: 0 0 10px -2px rgba(0,0,0,3);
+  z-index: 2;
+  margin-bottom: -60px;
 }
 </style>

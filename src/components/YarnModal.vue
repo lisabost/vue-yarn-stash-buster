@@ -197,7 +197,6 @@ export default {
   border: none;
   color: black;
   font-family: "EB Garamond", serif;
-  font-size: 1.25em;
 }
 
 </style>

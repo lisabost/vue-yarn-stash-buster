@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mt-3">
     <ravelry-search @search-finished="displaySearchResults" @clear="clearResults"></ravelry-search>
     <div v-if="authUser">
       <search-results-display :searchResults="displayResults" :authUser="authUser"></search-results-display>
