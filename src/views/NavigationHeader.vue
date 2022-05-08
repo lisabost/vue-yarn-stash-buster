@@ -7,7 +7,7 @@
     <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav>
         <b-nav-item to="/stash">Yarn Stash</b-nav-item>
-        <b-nav-item v-if="authUser" to="/search">Search</b-nav-item>
+        <b-nav-item to="/search">Search</b-nav-item>
         <b-nav-item v-if="authUser" to="/favorites">Favorites</b-nav-item>
         <b-nav-item v-if="authUser" to="/badges">Achievements</b-nav-item>
       </b-navbar-nav>

@@ -5,9 +5,15 @@
         <template v-slot:pattern-card-header>
           <h5 class="pattern-title">{{pattern.name}}</h5>
         </template>
-        <template v-slot:pattern-card-footer>
+        <template v-slot:pattern-card-footer v-if="authUser">
           <b-row class="footer-buttons d-flex flex-row justify-content-around">
             <more-details-modal :authUser="authUser" :item="pattern">More Details</more-details-modal>
+          </b-row>
+        </template>
+        <template v-slot:pattern-card-footer v-else>
+          <b-row class="footer-buttons d-flex flex-row justify-content-around mx-2">
+            <p>Sign into Stash Buster to save this pattern to your favorites!</p>
+            <p class="ravelry-link">Ravelry Link: <a :href="`https://ravelry.com/patterns/library/${pattern.permalink}`">{{pattern.name}}</a></p>
           </b-row>
         </template>
       </pattern-card>
@@ -33,5 +39,8 @@ export default {
 <style scoped>
 .pattern-title {
   font-family: "EB Garamond", serif;
+}
+.ravelry-link {
+  font-size: small;
 }
 </style>

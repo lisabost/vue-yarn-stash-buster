@@ -1,7 +1,12 @@
 <template>
   <div>
     <ravelry-search @search-finished="displaySearchResults" @clear="clearResults"></ravelry-search>
-    <search-results-display :searchResults="displayResults" :authUser="authUser"></search-results-display>
+    <div v-if="authUser">
+      <search-results-display :searchResults="displayResults" :authUser="authUser"></search-results-display>
+    </div>
+    <div v-else>
+      <search-results-display :searchResults="displayResults"></search-results-display>
+    </div>
   </div>
 </template>
 

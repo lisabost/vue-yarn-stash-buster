@@ -9,7 +9,7 @@
                 <b-card-title class="favorite-title">{{pattern.name}}</b-card-title>
               </template>
               <template v-slot:user-yarn-details>
-                <p class="m-2">Your Yarn: {{pattern.searchYarn.name}}, {{pattern.searchYarn.color}}</p>
+                <p class="m-2" v-if="pattern.searchYarn.name != null">Your Yarn: {{pattern.searchYarn.name}}, {{pattern.searchYarn.color}}</p>
               </template>
               <template v-slot:pattern-card-footer>
                 <b-row class="footer-buttons d-flex flex-row justify-content-around">

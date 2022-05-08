@@ -1,6 +1,11 @@
 <template>
   <div class="search-results-display">
-    <pattern-list :patterns="searchResults" @add-to-favorites="addToFavorites" :authUser="authUser"></pattern-list>
+    <div v-if="authUser">
+      <pattern-list :patterns="searchResults" :authUser="authUser"></pattern-list>
+    </div>
+    <div v-else>
+      <pattern-list :patterns="searchResults"></pattern-list>
+    </div>
   </div>
 </template>
 
@@ -14,10 +19,8 @@ export default {
     authUser: {required: false},
   },
   methods: {
-    addToFavorites(pattern) {
-      this.$emit('add-to-favorites', pattern);
-    }
   },
+
 }
 </script>
 
