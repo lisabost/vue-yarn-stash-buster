@@ -12,7 +12,7 @@ export const awardBadges = {
         }
     },
     methods: {
-        awardBadges(yarnCount, favoritePatternCount, yarnUsedCount) {
+        awardYarnBadges(yarnCount) {
             // yarn stash badges
             if(yarnCount >= 1) { this.badgeList.push(badges.oneYarn); }
             if(yarnCount >= 5) { this.badgeList.push(badges.fiveYarn); }
@@ -20,7 +20,8 @@ export const awardBadges = {
             if(yarnCount >= 15) { this.badgeList.push(badges.fifteenYarn); }
             if(yarnCount >= 20) { this.badgeList.push(badges.twentyYarn); }
             if(yarnCount >= 30){ this.badgeList.push(badges.thirtyYarn); }
-
+        },
+        awardPatternBadges(favoritePatternCount) {
             // favorite pattern badges
             if(favoritePatternCount >= 1) { this.badgeList.push(badges.onePattern); }
             if(favoritePatternCount >= 5) { this.badgeList.push(badges.fivePattern); }
@@ -28,7 +29,8 @@ export const awardBadges = {
             if(favoritePatternCount >= 15) { this.badgeList.push(badges.fifteenPattern); }
             if(favoritePatternCount >= 20) { this.badgeList.push(badges.twentyPattern); }
             if(favoritePatternCount >= 30) { this.badgeList.push(badges.thirtyPattern); }
-
+        },
+        awardYarnUsedBadges(yarnUsedCount){
             // yarn used badges
             if(yarnUsedCount >= 1) { this.badgeList.push(badges.oneUsed); }
             if(yarnUsedCount >= 5) { this.badgeList.push(badges.fiveUsed); }

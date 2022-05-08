@@ -1,16 +1,11 @@
 <template>
   <div>
-    <div v-if="yarnCollection">
-      <div v-if="yarnCollection.length > 0">
-        <b-row>
-          <b-col deck v-for="(yarn, i) in yarnCollection" :key="i" class="col-12 col-md-6 yarn-card-deck">
-            <yarn-card :authUser="authUser" class="yarn-card" :yarn="yarn"></yarn-card>
-          </b-col>
-        </b-row>
-      </div>
-      <div v-else>
-        <p>Loading...</p>
-      </div>
+    <div v-if="yarnCollection.length > 0">
+      <b-row>
+        <b-col deck v-for="(yarn, i) in yarnCollection" :key="i" class="col-12 col-md-6 yarn-card-deck">
+          <yarn-card :authUser="authUser" class="yarn-card" :yarn="yarn"></yarn-card>
+        </b-col>
+      </b-row>
     </div>
     <div v-else>
       <b-alert variant="danger" class="mt-5 w-100" show>Add some yarn to your stash</b-alert>

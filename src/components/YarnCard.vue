@@ -95,7 +95,6 @@ $primary: #AA96DA;
   margin-right: 0;
   margin-left: 0;
   font-family: "EB Garamond", serif;
-  font-size: 1em;
 }
 .yarn-card-title {
   font-family: "EB Garamond", serif;

@@ -40,7 +40,7 @@ export default {
 .stash-title {
   font-family: "EB Garamond", serif;
 }
-div.stash > div.create-yarn-modal > button {
+.stash > .create-yarn-modal > button {
   font-size: 1.25em;
 }
 </style>

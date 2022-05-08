@@ -1,5 +1,5 @@
 <template>
-  <div v-if="yarnCount > 0 && favoritePatternCount > 0">
+  <div v-if="yarnCount > 0 || favoritePatternCount > 0 || yarnUsedCount > 0">
     <badges-list :yarnCount="yarnCount" :favoritePatternCount="favoritePatternCount" :yarnUsedCount="yarnUsedCount" :authUser="authUser"></badges-list>
   </div>
   <div v-else>
@@ -18,8 +18,6 @@ export default {
   },
   data() {
     return {
-      yarnCollection: [],
-      patternCollection: [],
       yarnCount: 0,
       favoritePatternCount: 0,
       yarnUsedCount: 0,

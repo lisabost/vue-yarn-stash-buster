@@ -1,6 +1,6 @@
 <template>
   <b-row>
-    <b-col v-for="(badge, i) in badgeList" :key="i">
+    <b-col v-for="(badge, i) in badgeList" :key="i" class="col-12 col-md-2">
       <badge-card :badge="badge" :authUser="authUser"></badge-card>
     </b-col>
   </b-row>
@@ -24,7 +24,9 @@ export default {
   },
   mixins: [awardBadges],
   created() {
-    this.awardBadges(this.yarnCount, this.favoritePatternCount, this.yarnUsedCount);
+    this.awardYarnBadges(this.yarnCount);
+    this.awardPatternBadges(this.favoritePatternCount);
+    this.awardYarnUsedBadges(this.yarnUsedCount);
   }
 }
 </script>
