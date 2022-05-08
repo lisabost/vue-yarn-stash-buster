@@ -38,15 +38,18 @@ export default {
   methods: {
     saveToFavorites() {
       console.log(this.item.searchYarn);
-      this.pattern.searchYarn = this.item.searchYarn;
+      if(this.item.searchYarn) {
+        this.pattern.searchYarn = this.item.searchYarn;
+      }
       db.collection('crafters').doc(this.authUser.uid).collection('favorites')
           .add(this.pattern.toFirestore())
           .then(docRef => {
             console.log('Pattern saved', docRef);
             this.makeToast(this.pattern.name +' pattern saved to favorites', 'Pattern Saved', 'success');
             // update count of favorite patterns
-            this.raiseFavoritePatternCount();
             this.$bvModal.hide('modal-' + this.pattern.id);
+            this.raiseFavoritePatternCount();
+            this.checkForPatternsSavedAchievement();
           })
           .catch(error => {
             console.error('Error saving pattern to favorites', error);
@@ -56,7 +59,7 @@ export default {
     raiseFavoritePatternCount() {
       db.collection('crafters').doc(this.authUser.uid)
           .update({favoritePatternCount: firebase.firestore.FieldValue.increment(1)});
-      this.checkForPatternsSavedAchievement();
+
     },
   },
   computed: {

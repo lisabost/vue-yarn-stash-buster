@@ -7,7 +7,6 @@
     <b-row class="d-flex flex-row justify-content-around">
       <b-button type="button" v-if="authUser" class="mt-3" variant="primary" size="lg" @click="viewStash">View Your Stash</b-button>
       <b-button type="button" v-else class="mt-3 ml-3" variant="primary" size="lg" @click="login">Sign in to Manage Your Stash</b-button>
-      <b-button type="button" class="ml-3 mt-3" variant="primary" size="lg" @click="redirectToSearch">Search for Patterns</b-button>
     </b-row>
   </div>
 </template>

@@ -40,10 +40,10 @@ export const checkForNewAchievements = {
             if(this.favoritePatternCount === 1 || this.favoritePatternCount === 5 || this.favoritePatternCount === 10 || this.favoritePatternCount === 15 ||
                 this.favoritePatternCount === 20 || this.favoritePatternCount === 30) {
                 if(this.favoritePatternCount === 1) {
-                    this.makeToast(this.favoritePatternCount + ' Yarn Added', 'Achievement Earned!', 'primary')
+                    this.makeToast(this.favoritePatternCount + ' Pattern Saved', 'Achievement Earned!', 'primary')
                 }
                 else {
-                    this.makeToast(this.favoritePatternCount +' Yarns Added', 'Achievement Earned!', 'primary');
+                    this.makeToast(this.favoritePatternCount +' Pattern Saved', 'Achievement Earned!', 'primary');
                 }
             }
         }

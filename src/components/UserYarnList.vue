@@ -1,7 +1,7 @@
 <template>
   <div class="user-yarn-list">
     <div v-if="yarnCollection">
-      <yarn-list :yarn-collection="yarnCollection" :authUser="authUser" @yarn-deleted="deletedYarn"></yarn-list>
+      <yarn-list :yarn-collection="yarnCollection" :authUser="authUser"></yarn-list>
     </div>
     <div v-else>
       <p>Loading...</p>
