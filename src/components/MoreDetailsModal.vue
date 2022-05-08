@@ -21,6 +21,7 @@ import {getMoreDetails} from "@/mixins/getMoreDetails";
 import {db} from "@/firebase";
 import {makeToast} from "@/mixins/makeToast";
 import firebase from "firebase";
+import {checkForNewAchievements} from "@/mixins/checkForNewAchievements";
 
 export default {
   name: "MoreDetailsModal",
@@ -33,7 +34,7 @@ export default {
       buttonText: `Save to Favorites`,
     }
   },
-  mixins: [getMoreDetails, makeToast],
+  mixins: [getMoreDetails, makeToast, checkForNewAchievements],
   methods: {
     saveToFavorites() {
       console.log(this.item.searchYarn);
@@ -55,6 +56,7 @@ export default {
     raiseFavoritePatternCount() {
       db.collection('crafters').doc(this.authUser.uid)
           .update({favoritePatternCount: firebase.firestore.FieldValue.increment(1)});
+      this.checkForPatternsSavedAchievement();
     },
   },
   computed: {

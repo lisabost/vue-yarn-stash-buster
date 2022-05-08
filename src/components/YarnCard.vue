@@ -35,6 +35,7 @@ import {db, storage} from "@/firebase";
 import YarnModal from "@/components/YarnModal";
 import {makeToast} from "@/mixins/makeToast";
 import firebase from "firebase";
+import {checkForNewAchievements} from "@/mixins/checkForNewAchievements";
 export default {
   name: "YarnCard",
   data() {
@@ -47,7 +48,7 @@ export default {
     yarn: {type: Object, required: true},
     authUser: {required: true},
   },
-  mixins: [makeToast],
+  mixins: [makeToast, checkForNewAchievements],
   methods: {
     removeYarn() {
       // remove image from storage
@@ -78,6 +79,7 @@ export default {
     lowerYarnCount() {
       db.collection('crafters').doc(this.authUser.uid)
           .update({yarnUsed: firebase.firestore.FieldValue.increment(1)});
+      this.checkYarnUsedForAchievement();
     }
   },
   computed: {

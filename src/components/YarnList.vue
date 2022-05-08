@@ -23,12 +23,6 @@ export default {
     yarnCollection: {type: Array},
     authUser: {required: true},
   },
-  data() {
-    return {
-    }
-  },
-  methods: {
-  }
 }
 </script>
 

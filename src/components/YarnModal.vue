@@ -37,6 +37,7 @@ import {db, storage} from "@/firebase";
 import Yarn from "@/models/Yarn";
 import {makeToast} from "@/mixins/makeToast";
 import firebase from "firebase";
+import {checkForNewAchievements} from "@/mixins/checkForNewAchievements";
 
 export default {
   name: "YarnModal",
@@ -68,7 +69,7 @@ export default {
       yarnCount: 0
     }
   },
-  mixins: [makeToast],
+  mixins: [makeToast, checkForNewAchievements],
   methods: {
     createOrEditYarn() {
       if(this.currentlyEditing) {
@@ -94,6 +95,7 @@ export default {
           this.newYarn.yarn = new Yarn();
           // close modal
           this.$bvModal.hide(this.modalId);
+          this.checkYarnCountForAchievement();
         })
         .catch(error => {
           console.log('Error adding yarn', error)
