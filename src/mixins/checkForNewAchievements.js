@@ -37,13 +37,13 @@ export const checkForNewAchievements = {
             }
         },
         checkForPatternsSavedAchievement() {
-            if(this.favoritePatternCount === 1 || this.favoritePatternCount === 5 || this.favoritePatternCount === 10 || this.favoritePatternCount === 15 ||
-                this.favoritePatternCount === 20 || this.favoritePatternCount === 30) {
-                if(this.favoritePatternCount === 1) {
-                    this.makeToast(this.favoritePatternCount + ' Pattern Saved', 'Achievement Earned!', 'primary')
+            if(this.favoritePatternCount === 0 || this.favoritePatternCount === 4 || this.favoritePatternCount === 9 || this.favoritePatternCount === 14 ||
+                this.favoritePatternCount === 19 || this.favoritePatternCount === 29) {
+                if(this.favoritePatternCount === 0) {
+                    this.makeToast((this.favoritePatternCount +1) + ' Pattern Saved', 'Achievement Earned!', 'primary')
                 }
                 else {
-                    this.makeToast(this.favoritePatternCount +' Pattern Saved', 'Achievement Earned!', 'primary');
+                    this.makeToast((this.favoritePatternCount +1) +' Patterns Saved', 'Achievement Earned!', 'primary');
                 }
             }
         }

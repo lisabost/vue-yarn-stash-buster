@@ -70,7 +70,7 @@ export default {
             // update count of favorite patterns
             this.$bvModal.hide('modal-' + this.pattern.id);
             this.raiseFavoritePatternCount();
-            this.checkForPatternsSavedAchievement();
+            this.$emit('pattern-saved');
           })
           .catch(error => {
             console.error('Error saving pattern to favorites', error);
@@ -88,13 +88,8 @@ export default {
     },
   },
   created() {
-    if(this.authUser) {
       this.searchYarn = this.item.searchYarn;
       this.getMoreDetails(this.item);
-    }
-    else {
-      this.getMoreDetails(this.item);
-    }
   }
 }
 </script>
