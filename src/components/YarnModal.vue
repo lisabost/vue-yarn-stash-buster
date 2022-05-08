@@ -87,7 +87,7 @@ export default {
         .add(this.newYarn.yarn.toFirestore())
         .then(docRef => {
           console.log('Yarn added', docRef)
-          this.makeToast('Yarn added', 'Success!', 'success')
+          this.makeToast(this.newYarn.yarn.name + ', ' + this.newYarn.yarn.color +' added to your stash', 'Yarn Added!', 'success');
 
           // add the image to storage
           this.addImage(docRef.id);
@@ -99,7 +99,7 @@ export default {
         })
         .catch(error => {
           console.log('Error adding yarn', error)
-          this.makeToast('Error adding yarn', 'Error', 'danger')
+          this.makeToast('There was a problem adding the yarn to your stash. Please try again.', 'Error', 'danger')
         });
     },
     addImage(docId){
@@ -115,7 +115,7 @@ export default {
       // validate extension
       if(allowedTypes.indexOf(extension) < 0){
         // invalid extension - let the user know
-        this.makeToast('Invalid file type.', 'Error', 'danger');
+        this.makeToast('Invalid file type. Please use jpg, png, and gif files only.', 'Error', 'danger');
         return false;
       }
       // validate size (less than 200KB
@@ -139,7 +139,7 @@ export default {
           .catch(error => {
             console.error('Error updating yarn' , error, )
             // let user know error
-            this.makeToast('Error updating yarn', 'Error', 'danger')
+            this.makeToast('There was a problem adding the image to your yarn. Please try again.', 'Error updating yarn', 'danger')
           })
     },
     editYarn() {
@@ -154,7 +154,7 @@ export default {
                 .delete()
                 .catch(error => {
                   console.error('Error deleting yarn', error)
-                  this.makeToast('Error deleting yarn', 'Error!', 'danger');
+                  this.makeToast('There was a problem removing the yarn from your stash. Please try again.', 'Error Deleting Yarn!', 'danger');
                 });
             storage.child('/yarn').child(this.yarnId)
               .put(this.newYarn.image)
@@ -166,13 +166,17 @@ export default {
                 return snapshot.ref.getDownloadURL();
               })
               .then(url => db.collection('crafters').doc(this.authUser.uid).collection('yarn').doc(this.yarnId).update({image: url}))
-              .then(docRef => console.log('Yarn Updated', docRef))
+              .then(
+                  docRef => {
+                    console.log('Yarn Updated', docRef)
+                    this.makeToast(tempYarn.name + ' yarn updated', 'Image Added!', 'success')
+                  })
               .catch(error => {
                 console.error('Error updating image' , error)
                 // let user know error
-                this.makeToast('Error updating yarn', 'Error', 'danger')
+                this.makeToast('There was a problem updating the image of the yarn in your stash. Please try again', 'Error Updating Yarn!', 'danger')
               })
-            this.makeToast(' Yarn Updated: Imaged Changed/Added', 'Image Added!', 'success')
+
             // close modal
             this.$bvModal.hide(this.modalId);
           })
