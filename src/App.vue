@@ -49,7 +49,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
-  min-height: 100%;
+  //min-height: 100%;
 
   /* Negative indent footer by its height */
   margin: 0 auto -60px;
@@ -68,10 +68,10 @@ nav a.router-link-exact-active {
 }
 footer-view {
   height: 60px;
-  position: fixed;
+  //position: fixed;
 }
 .content-body {
-  margin-top: 70px;
+  padding-top: 70px;
   margin-bottom: 25px;
 }
 </style>

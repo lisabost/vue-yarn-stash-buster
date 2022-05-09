@@ -2,7 +2,7 @@
   <div class="home">
     <h1 class="welcome-title">Welcome to Stash Buster</h1>
     <div class="image-holder">
-      <img alt="Yarn ball" src="../assets/free-ball-of-wool.png" class="mx-auto d-block">
+      <img alt="Yarn ball" src="../assets/free-ball-of-wool.png" class="mx-auto d-block home-image" >
     </div>
     <b-row class="d-flex flex-row justify-content-around home-button-row">
       <b-button type="button" v-if="authUser" class="mt-3 btn-outline-tertiary home-buttons" variant="secondary" size="lg" @click="viewStash">View Your Stash</b-button>
@@ -20,6 +20,10 @@ export default {
   name: 'HomeView',
   props: {
     authUser: {required: false}
+  },
+  data() {
+    return {
+    }
   },
   components: {
   },
@@ -52,5 +56,9 @@ export default {
 .home-buttons{
   border: none;
   color: black;
+}
+.home-image {
+  max-width: 100%;
+  height: auto;
 }
 </style>
