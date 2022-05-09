@@ -70,7 +70,8 @@ export default {
             // update count of favorite patterns
             this.$bvModal.hide('modal-' + this.pattern.id);
             this.raiseFavoritePatternCount();
-            this.$emit('pattern-saved');
+            // this.$emit('pattern-saved');
+            this.checkForPatternsSavedAchievement();
           })
           .catch(error => {
             console.error('Error saving pattern to favorites', error);

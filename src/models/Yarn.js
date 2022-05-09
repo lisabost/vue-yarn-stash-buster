@@ -1,9 +1,9 @@
 function Yarn(name, length, color, weight, fiber) {
-    this.name = name;
-    this.length = length;
-    this.color = color;
-    this.weight = weight;
-    this.fiber = fiber;
+    this.name = name ?? '';
+    this.length = length ?? 0;
+    this.color = color ?? '';
+    this.weight = weight ?? '';
+    this.fiber = fiber ?? '';
 
     this.toString = function () {
         return this.name;

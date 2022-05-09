@@ -150,12 +150,14 @@ export default {
           .then(docRef => {
             console.log('Yarn updated', docRef)
             //update the image - delete and then add new one
-            storage.child('/yarn').child(this.yarnId)
-                .delete()
-                .catch(error => {
-                  console.error('Error deleting yarn', error)
-                  this.makeToast('There was a problem removing the yarn from your stash. Please try again.', 'Error Deleting Yarn!', 'danger');
-                });
+            if(storage.child('/yarn').child(this.yarnId)) {
+              storage.child('/yarn').child(this.yarnId)
+                  .delete()
+                  .catch(error => {
+                    console.error('Error deleting yarn', error)
+                    this.makeToast('There was a problem removing the yarn from your stash. Please try again.', 'Error Deleting Yarn!', 'danger');
+                  });
+            }
             storage.child('/yarn').child(this.yarnId)
               .put(this.newYarn.image)
               .then(snapshot => {

@@ -1,11 +1,6 @@
 <template>
   <div class="search-results-display">
-    <div v-if="authUser">
-      <pattern-list :patterns="searchResults" :authUser="authUser"></pattern-list>
-    </div>
-    <div v-else>
-      <pattern-list :patterns="searchResults"></pattern-list>
-    </div>
+    <pattern-list :patterns="searchResults" :authUser="authUser"></pattern-list>
   </div>
 </template>
 

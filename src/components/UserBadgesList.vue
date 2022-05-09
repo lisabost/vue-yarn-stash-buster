@@ -1,5 +1,5 @@
 <template>
-  <div v-if="yarnCount > 0 || favoritePatternCount > 0 || yarnUsedCount > 0">
+  <div v-if="this.yarnCount > 0 || this.favoritePatternCount > 0 || this.yarnUsedCount > 0">
     <badges-list :yarnCount="yarnCount" :favoritePatternCount="favoritePatternCount" :yarnUsedCount="yarnUsedCount" :authUser="authUser"></badges-list>
   </div>
   <div v-else>

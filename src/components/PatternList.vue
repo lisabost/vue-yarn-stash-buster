@@ -7,7 +7,7 @@
         </template>
         <template v-slot:pattern-card-footer v-if="authUser">
           <b-row class="footer-buttons d-flex flex-row justify-content-around">
-            <more-details-modal :authUser="authUser" :item="pattern" @pattern-saved="checkForAchievement">More Details</more-details-modal>
+            <more-details-modal :authUser="authUser" :item="pattern">More Details</more-details-modal>
           </b-row>
         </template>
         <template v-slot:pattern-card-footer v-else>
@@ -24,7 +24,7 @@
 <script>
 import PatternCard from "@/components/PatternCard";
 import MoreDetailsModal from "@/components/MoreDetailsModal";
-import {checkForNewAchievements} from "@/mixins/checkForNewAchievements";
+
 export default {
   name: "PatternList",
   components: {MoreDetailsModal, PatternCard},
@@ -32,11 +32,13 @@ export default {
     patterns: {type: Array},
     authUser: {required: false},
   },
-  mixins: [checkForNewAchievements],
+  mixins: [],
   methods: {
-    checkForAchievement() {
-      this.checkForPatternsSavedAchievement();
-    }
+    // checkForAchievement() {
+    //   if(this.authUser){
+    //     this.checkForPatternsSavedAchievement();
+    //   }
+    // }
   },
 }
 </script>

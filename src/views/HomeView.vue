@@ -39,6 +39,7 @@ export default {
             console.error('Error logging in', error);
             this.makeToast('Error logging in', 'Log in Failed', 'danger')
           });
+
       this.viewStash();
     },
     viewStash() {

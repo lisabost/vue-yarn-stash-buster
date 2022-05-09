@@ -11,7 +11,7 @@
 <script>
 import NavigationHeader from "@/views/NavigationHeader";
 import router from "@/router/router";
-import {firebase} from "@/firebase";
+import {db, firebase} from "@/firebase";
 import User from "@/models/User";
 import FooterView from "@/views/FooterView";
 
@@ -31,13 +31,25 @@ export default {
     firebase.auth().onAuthStateChanged(user => {
       if(user) {
         console.log('Signed in as: ', user);
-        this.authUser = new User(user)
+        this.authUser = new User(user);
+        db.collection('crafters').doc(user.uid).get()
+        .then(document => {
+          if(!document || !document.exists) {
+            db.collection('crafters').doc(user.uid).set({
+              name: user.displayName,
+              id: user.uid,
+              email: user.email,
+              yarnCount: 0,
+              yarnUsed: 0,
+              favoritePatternCount: 0
+            });
+          }
+        })
       }
       else {
         console.log('Not signed in');
         this.authUser = null;
       }
-
     })
   }
 }
