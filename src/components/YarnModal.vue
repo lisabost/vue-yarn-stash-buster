@@ -52,15 +52,7 @@ export default {
   data() {
     return {
       options: [
-        {value: null, text: 'Select a yarn weight'},
-        {value: 'lace', text: 'Lace'},
-        {value: 'fingering', text: 'Fingering/Sock'},
-        {value: 'sport', text: 'Sport/Baby'},
-        {value: 'dk', text: 'DK/Light Worsted'},
-        {value: 'worsted', text: 'Worsted/Aran'},
-        {value: 'bulky', text: 'Bulky/Chunky'},
-        {value: 'roving', text: 'Bulky/Roving'},
-        {value: 'jumbo', text: 'Jumbo'},
+        {value: null, text: 'Select a yarn weight'}, 'Lace', 'Fingering', 'DK', 'Worsted', 'Aran', 'Bulky', 'Super Bulky'
       ],
       newYarn: {
         yarn: this.yarn ?? new Yarn(),
