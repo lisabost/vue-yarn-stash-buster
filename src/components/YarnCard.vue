@@ -4,19 +4,20 @@
       <b-card-title class="yarn-card-title">{{yarn.name}}</b-card-title>
     </template>
     <template>
-      <b-card-text class="mt-2">
-        <b-row>
-          <b-col md="6" class="d-flex flex-column">
-            <b-img :src="yarn.image" :alt="yarn.name" class="m-3 yarn-image"></b-img>
-          </b-col>
-          <b-col md="6" class="d-flex flex-column mt-3">
-            <p class="capitalized-text" v-if="yarn.color">Color: {{yarn.color}}</p>
-            <p class="capitalized-text">Length: {{yarn.length}} yards</p>
-            <p class="capitalized-text">Weight: {{yarn.weight}}</p>
-            <p class="capitalized-text" v-if="yarn.fiber">Fiber type: {{yarn.fiber}}</p>
-          </b-col>
-        </b-row>
-      </b-card-text>
+        <b-card-text class="mt-2">
+          <b-row>
+            <b-col>
+              <b-img fluid :src="yarn.image" :alt="yarn.name" class="m-3 yarn-image"
+                sizes="(max-width: 600px) 200px, 300px"></b-img>
+            </b-col>
+            <b-col class="mt-3">
+              <p class="capitalized-text" v-if="yarn.color">Color: {{yarn.color}}</p>
+              <p class="capitalized-text">Length: {{yarn.length}} yards</p>
+              <p class="capitalized-text">Weight: {{yarn.weight}}</p>
+              <p class="capitalized-text" v-if="yarn.fiber">Fiber type: {{yarn.fiber}}</p>
+            </b-col>
+          </b-row>
+        </b-card-text>
     </template>
     <template v-slot:footer>
       <b-row class="yarn-button-row d-flex flex-row justify-content-around">
@@ -102,7 +103,8 @@ $primary: #AA96DA;
   font-family: "EB Garamond", serif;
 }
 .yarn-image {
-  max-height: 250px;
+  max-width: 100%;
+  height: auto;
   object-fit: cover;
 }
 .yarn-card-button {

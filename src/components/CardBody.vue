@@ -1,8 +1,10 @@
 <template>
-  <b-card class="my-2 reusable-card">
+  <b-card class="my-2 reusable-card" img-top>
     <b-card-header class="card-header"><slot name="header"></slot></b-card-header>
-    <slot></slot>
-    <footer class="sticky-footer"><slot name="footer"></slot></footer>
+    <b-card-body>
+      <slot></slot>
+    </b-card-body>
+    <template #footer><slot name="footer"></slot></template>
   </b-card>
 </template>
 
@@ -20,10 +22,10 @@ $primary: #AA96DA;
   width: 100%;
   justify-content: center;
 }
-.reusable-card {
-  height: 400px;
-  width: 100%;
-}
+//.reusable-card {
+//  height: 400px;
+//  width: 100%;
+//}
 .card-header {
   width: 100%;
   background-color: $primary;

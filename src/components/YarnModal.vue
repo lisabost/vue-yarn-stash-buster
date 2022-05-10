@@ -10,8 +10,8 @@
             <b-form-invalid-feedback>Yarn name is required</b-form-invalid-feedback>
           </b-form-group>
           <b-form-group label="Length in Yards:" label-for="yardage">
-            <b-form-input id="yardage" type="number" min="0" v-model="newYarn.yarn.length" required></b-form-input>
-            <b-form-invalid-feedback>Yarn length must be greater than 0</b-form-invalid-feedback>
+            <b-form-input id="yardage" type="number" min="0" max="2000" v-model="newYarn.yarn.length" required></b-form-input>
+            <b-form-invalid-feedback>Yarn length must be greater than 0 and less than 2000</b-form-invalid-feedback>
           </b-form-group>
           <b-form-group label="Color: " label-for="color">
             <b-form-input id="color" v-model="newYarn.yarn.color"></b-form-input>
@@ -149,15 +149,7 @@ export default {
           .update(tempYarn.toFirestore())
           .then(docRef => {
             console.log('Yarn updated', docRef)
-            //update the image - delete and then add new one
-            if(storage.child('/yarn').child(this.yarnId)) {
-              storage.child('/yarn').child(this.yarnId)
-                  .delete()
-                  .catch(error => {
-                    console.error('Error deleting yarn', error)
-                    this.makeToast('There was a problem removing the yarn from your stash. Please try again.', 'Error Deleting Yarn!', 'danger');
-                  });
-            }
+            //update the image
             storage.child('/yarn').child(this.yarnId)
               .put(this.newYarn.image)
               .then(snapshot => {
@@ -178,7 +170,6 @@ export default {
                 // let user know error
                 this.makeToast('There was a problem updating the image of the yarn in your stash. Please try again', 'Error Updating Yarn!', 'danger')
               })
-
             // close modal
             this.$bvModal.hide(this.modalId);
           })
