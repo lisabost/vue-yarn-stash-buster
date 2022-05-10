@@ -7,8 +7,7 @@
         <b-card-text class="mt-2">
           <b-row>
             <b-col>
-              <b-img fluid :src="yarn.image" :alt="yarn.name" class="m-3 yarn-image"
-                sizes="(max-width: 600px) 200px, 300px"></b-img>
+              <b-img fluid :src="yarn.image" :alt="yarn.name" class="m-3"></b-img>
             </b-col>
             <b-col class="mt-3">
               <p class="capitalized-text" v-if="yarn.color">Color: {{yarn.color}}</p>
@@ -101,11 +100,6 @@ $primary: #AA96DA;
 }
 .yarn-card-title {
   font-family: "EB Garamond", serif;
-}
-.yarn-image {
-  max-width: 100%;
-  height: auto;
-  object-fit: cover;
 }
 .yarn-card-button {
   border: none;
