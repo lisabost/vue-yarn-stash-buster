@@ -38,7 +38,4 @@ export default {
   height: 200px;
   object-fit: cover;
 }
-.pattern-title {
-  font-family: "EB Garamond", serif;
-}
 </style>
