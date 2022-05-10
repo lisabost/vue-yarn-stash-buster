@@ -18,10 +18,10 @@
     </template>
     <template v-slot:footer>
       <b-row class="yarn-button-row d-flex flex-row justify-content-around">
-        <b-button variant="danger" class="my-2 btn-outline-tertiary yarn-card-button float-right ml-3" @click="removeYarn">Remove Yarn</b-button>
+        <b-button variant="danger" class="m-2 btn-outline-tertiary yarn-card-button float-right ml-3" @click="removeYarn">Remove Yarn</b-button>
         <yarn-modal :auth-user="authUser" :ok-button-text="'Edit Yarn'" :currentlyEditing="editing"
                     :yarn="yarn" :modalId="getModalId" :yarnId="yarn.id" class="ml-3">Edit Yarn</yarn-modal>
-        <b-button @click="findAPattern(yarn)" class="my-2 yarn-card-button btn-outline-tertiary" variant="secondary">Find a Pattern!</b-button>
+        <b-button @click="findAPattern(yarn)" class="m-2 yarn-card-button btn-outline-tertiary" variant="secondary">Find a Pattern!</b-button>
       </b-row>
     </template>
   </card-body>

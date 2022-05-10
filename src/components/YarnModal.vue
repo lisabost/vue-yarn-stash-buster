@@ -1,6 +1,6 @@
 <template>
   <div class="create-yarn-modal">
-    <b-button @click="$bvModal.show(modalId)" class="my-2 btn-outline-tertiary add-yarn-button" variant="secondary"><slot></slot></b-button>
+    <b-button @click="$bvModal.show(modalId)" class="m-2 btn-outline-tertiary add-yarn-button" variant="secondary"><slot></slot></b-button>
     <b-modal scrollable centered header-bg-variant="primary" footer-bg-variant="primary" cancel-variant="danger" ok-variant="secondary" footer-class="yarn-modal-footer"
              @ok.prevent="createOrEditYarn" :ok-title="okButtonText" title="Add Yarn to Stash" :id="modalId">
       <template>
@@ -143,26 +143,28 @@ export default {
             console.log('Yarn updated', docRef)
             this.$bvModal.hide(this.modalId);
             //update the image
-            storage.child('/yarn').child(this.yarnId)
-              .put(this.newYarn.image)
-              .then(snapshot => {
-                console.log('Image updated', snapshot)
-                //clear form
-                this.newYarn.image = null;
-                // get the image url to update the yarn document
-                return snapshot.ref.getDownloadURL();
-              })
-              .then(url => db.collection('crafters').doc(this.authUser.uid).collection('yarn').doc(this.yarnId).update({image: url}))
-              .then(
-                  docRef => {
-                    console.log('Yarn Updated', docRef)
-                    this.makeToast(tempYarn.name + ' yarn updated', 'Image Added!', 'success')
+            if(this.newYarn.image != null) {
+              storage.child('/yarn').child(this.yarnId)
+                  .put(this.newYarn.image)
+                  .then(snapshot => {
+                    console.log('Image updated', snapshot)
+                    //clear form
+                    this.newYarn.image = null;
+                    // get the image url to update the yarn document
+                    return snapshot.ref.getDownloadURL();
                   })
-              .catch(error => {
-                console.error('Error updating image' , error)
-                // let user know error
-                this.makeToast('There was a problem updating the image of the yarn in your stash. Please try again', 'Error Updating Yarn!', 'danger')
-              })
+                  .then(url => db.collection('crafters').doc(this.authUser.uid).collection('yarn').doc(this.yarnId).update({image: url}))
+                  .then(
+                      docRef => {
+                        console.log('Yarn Updated', docRef)
+                        this.makeToast(tempYarn.name + ' yarn updated', 'Image Added!', 'success')
+                      })
+                  .catch(error => {
+                    console.error('Error updating image' , error)
+                    // let user know error
+                    this.makeToast('There was a problem updating the image of the yarn in your stash. Please try again', 'Error Updating Yarn!', 'danger')
+                  })
+            }
           })
     },
     raiseYarnCount() {

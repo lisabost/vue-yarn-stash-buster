@@ -136,10 +136,10 @@ export default {
       this.page = 1;
       //clear results
       this.clearSearchResults();
-      this.$emit('clear', this.searchResults);
     },
     clearSearchResults() {
       this.searchResults.splice(0);
+      this.displayResults.splice(0);
     },
     nextPage() {
       this.page++;

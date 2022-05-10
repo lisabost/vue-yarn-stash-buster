@@ -1,7 +1,7 @@
 <template>
   <b-row class="badges">
     <b-col>
-      <b-img :src="badge"></b-img>
+      <b-img fluid :src="badge"></b-img>
     </b-col>
   </b-row>
 </template>
