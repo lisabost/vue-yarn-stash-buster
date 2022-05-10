@@ -149,6 +149,7 @@ export default {
           .update(tempYarn.toFirestore())
           .then(docRef => {
             console.log('Yarn updated', docRef)
+            this.$bvModal.hide(this.modalId);
             //update the image
             storage.child('/yarn').child(this.yarnId)
               .put(this.newYarn.image)
@@ -170,8 +171,6 @@ export default {
                 // let user know error
                 this.makeToast('There was a problem updating the image of the yarn in your stash. Please try again', 'Error Updating Yarn!', 'danger')
               })
-            // close modal
-            this.$bvModal.hide(this.modalId);
           })
     },
     raiseYarnCount() {

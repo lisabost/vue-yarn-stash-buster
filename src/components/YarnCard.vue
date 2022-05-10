@@ -3,20 +3,18 @@
     <template v-slot:header>
       <b-card-title class="yarn-card-title">{{yarn.name}}</b-card-title>
     </template>
-    <template>
-        <b-card-text class="mt-2">
+    <template v-slot:body>
           <b-row>
-            <b-col>
-              <b-img fluid :src="yarn.image" :alt="yarn.name" class="m-3"></b-img>
+            <b-col cols="4">
+              <b-img fluid :src="yarn.image" :alt="yarn.name" class="m-3 yarn-image"></b-img>
             </b-col>
-            <b-col class="mt-3">
+            <b-col class="mt-3 ml-3">
               <p class="capitalized-text" v-if="yarn.color">Color: {{yarn.color}}</p>
               <p class="capitalized-text">Length: {{yarn.length}} yards</p>
               <p class="capitalized-text">Weight: {{yarn.weight}}</p>
               <p class="capitalized-text" v-if="yarn.fiber">Fiber type: {{yarn.fiber}}</p>
             </b-col>
           </b-row>
-        </b-card-text>
     </template>
     <template v-slot:footer>
       <b-row class="yarn-button-row d-flex flex-row justify-content-around">
@@ -104,5 +102,11 @@ $primary: #AA96DA;
 .yarn-card-button {
   border: none;
   color: black;
+}
+//.yarn-image {
+//  max-height: 50%;
+//}
+.info-row {
+  max-height: 288px;
 }
 </style>
