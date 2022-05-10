@@ -6,8 +6,6 @@
 
 <script>
 import RavelrySearch from "@/components/RavelrySearch";
-import {makeToast} from "@/mixins/makeToast";
-import {getMoreDetails} from "@/mixins/getMoreDetails";
 
 export default {
   name: "RavelrySearchView",
@@ -15,13 +13,11 @@ export default {
   props: {
     authUser: {required: false}
   },
-  mixins: [makeToast, getMoreDetails],
   data() {
     return {
     }
   },
   methods: {
-
   }
 }
 </script>

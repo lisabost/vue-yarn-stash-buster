@@ -34,11 +34,6 @@ export default {
   },
   mixins: [],
   methods: {
-    // checkForAchievement() {
-    //   if(this.authUser){
-    //     this.checkForPatternsSavedAchievement();
-    //   }
-    // }
   },
 }
 </script>

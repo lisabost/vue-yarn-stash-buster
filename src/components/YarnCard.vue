@@ -9,10 +9,10 @@
               <b-img fluid :src="yarn.image" :alt="yarn.name" class="m-3 yarn-image"></b-img>
             </b-col>
             <b-col class="mt-3 ml-3">
-              <p class="capitalized-text" v-if="yarn.color">Color: {{yarn.color}}</p>
-              <p class="capitalized-text">Length: {{yarn.length}} yards</p>
-              <p class="capitalized-text">Weight: {{yarn.weight}}</p>
-              <p class="capitalized-text" v-if="yarn.fiber">Fiber type: {{yarn.fiber}}</p>
+              <p class="text-capitalize" v-if="yarn.color">Color: {{yarn.color}}</p>
+              <p class="text-capitalize">Length: {{yarn.length}} yards</p>
+              <p class="text-capitalize">Weight: {{yarn.weight}}</p>
+              <p class="text-capitalize" v-if="yarn.fiber">Fiber type: {{yarn.fiber}}</p>
             </b-col>
           </b-row>
     </template>

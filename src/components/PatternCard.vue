@@ -5,7 +5,7 @@
     </template>
     <template v-slot:body>
       <b-card-img class="pattern-image" :src="item.first_photo.medium_url" :alt="item.name"></b-card-img>
-      <b-card-sub-title class="mt-3 ml-2">Designer: {{item.pattern_author.name}}</b-card-sub-title>
+      <b-card-sub-title class="p-3">Designer: {{item.pattern_author.name}}</b-card-sub-title>
       <slot name="user-yarn-details"></slot>
     </template>
     <template v-slot:footer>

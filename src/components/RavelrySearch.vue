@@ -52,6 +52,7 @@ export default {
       searchResults: [],
       lastSearchTerm: '',
       lastSearchLength: '',
+      lastSearchCraft: '',
       searchList: [],
       yarnForSearch: null,
       page: 1,
@@ -66,21 +67,22 @@ export default {
   methods: {
     checkForNewSearch() {
       // if the search term is new or the search length is new clear out results for new results
-      if(this.searchObject.searchTerm !== this.lastSearchTerm) {
+      if(this.searchObject.searchTerm !== this.lastSearchTerm || this.searchObject.craftType !== this.lastSearchCraft) {
         this.lastSearchTerm = this.searchObject.searchTerm;
         this.lastSearchLength = this.searchObject.searchLength;
+        this.lastSearchCraft = this.searchObject.craftType;
         return true;
       }
       this.lastSearchTerm = this.searchObject.searchTerm;
       this.lastSearchLength = this.searchObject.searchLength;
+      this.lastSearchCraft = this.searchObject.craftType;
     },
     search() {
         let isNewSearch = this.checkForNewSearch();
         if (isNewSearch) {
           // clear out the display
           this.clearSearchResults();
-          // reset our page count
-          this.$emit('page-reset');
+          this.page = 1;
         }
         this.$emit('searching');
         // build request arguments
@@ -107,7 +109,6 @@ export default {
                 let tempItem = response.data.patterns[i];
                 tempItem.searchYarn = this.$route.params.searchWithYarn;
                 this.searchResults.push(tempItem);
-                // this.searchResults.push(response.data.patterns[i]);
               }
             } else {
               this.searchResults = [];
