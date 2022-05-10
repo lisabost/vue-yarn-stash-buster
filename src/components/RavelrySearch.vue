@@ -147,6 +147,7 @@ export default {
       this.searchObject.searchLength = this.lastSearchLength;
       this.clearSearchResults();
       this.search();
+      window.scrollTo(0, 0)
     },
     previousPage() {
       if(this.page > 1) {
@@ -156,6 +157,7 @@ export default {
       this.searchObject.searchLength = this.lastSearchLength;
       this.clearSearchResults();
       this.search();
+      window.scrollTo(0, 0)
     }
   },
   computed : {
